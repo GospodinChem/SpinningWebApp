@@ -1,0 +1,29 @@
+[
+  {
+    "Id": "5AD1EA09-52EB-4296-8321-B278B06E920C",
+    "Model": "Stella FK 4000XG ",
+    "Price": "1453.50",
+    "AvailableAmount": "12",
+    "Description": "Mn qka makara kurti paveta",
+    "ManufacturerId": "F21230E5-9600-4113-BC2A-18C01AFFDF26",
+    "CategoryId": "9F63652A-FB08-43D0-AC49-A2A281C359F9"
+  },
+  {
+    "Id": "45B72494-1287-4EB6-B22B-4A672A9BD01C",
+    "Model": "Revenge SG6 Medium Game",
+    "Price": "419.00",
+    "AvailableAmount": "16",
+    "Description": "Giga ceps vudica",
+    "ManufacturerId": "FE6692DA-6330-4C1A-A5E2-512596CD54A1",
+    "CategoryId": "ACBD3CDE-F96E-4A60-955E-7290A41F155C"
+  },
+  {
+    "Id": "3AB3F6D1-F45D-4C80-B9AC-F4CADE704097",
+    "Model": "Jester Minnow 78S",
+    "Price": "32.90",
+    "AvailableAmount": "20",
+    "Description": "Brutaliika si e nqa da luja",
+    "ManufacturerId": "48216279-E574-41C2-B631-F59AB5F07830",
+    "CategoryId": "E4EA4F50-B25A-4BD9-9120-0DF23D58A544"
+  }
+]
