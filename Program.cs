@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using SpinningWebApp.Contracts;
 using SpinningWebApp.Data;
 using SpinningWebApp.Models.Account;
+using SpinningWebApp.Services;
 
 namespace SpinningWebApp
 {
@@ -20,6 +22,13 @@ namespace SpinningWebApp
             builder.Services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddControllersWithViews();
+
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Account/Login";
+            });
+
+            builder.Services.AddScoped<IShopService, ShopService>();
 
             var app = builder.Build();
 

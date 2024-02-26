@@ -1,50 +1,241 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - SpinningWebApp</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/SpinningWebApp.styles.css" asp-append-version="true" />
+    <title>DLF - The best online fishing shop</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+
+    <!-- Start Include All CSS -->
+    <link rel="stylesheet" href="~/assets/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/assets/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/assets/css/elegant-icons.css" />
+    <link rel="stylesheet" href="~/assets/css/fishto-icons.css" />
+    <link rel="stylesheet" href="~/assets/css/animate.css" />
+    <link rel="stylesheet" href="~/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/assets/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/assets/css/slick.css">
+    <link rel="stylesheet" href="~/assets/css/lightcase.css">
+    <link rel="stylesheet" href="~/assets/css/theme.css" />
+    <link rel="stylesheet" href="~/assets/css/responsive.css" />
+    <!-- End Include All CSS -->
+    <!-- Favicon Icon -->
+    <link rel="icon" type="image/png" href="/assets/images/favicon.png">
+    <!-- Favicon Icon -->
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SpinningWebApp</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+    <!-- Topbar Start -->
+    <section class="topbar tp-three">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7">
+                    <div class="topinfo">
+                        <p>FREE express international delivery + EASY returns</p>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="language">
+                        <a class="select" href="javascript:void(0)">Language<i class="arrow_carrot-down"></i></a>
+                        <div class="currency-lang">
+                            <ul>
+                                <li><a href="#">English</a></li>
+                                <li><a href="#">French</a></li>
+                                <li><a href="#">Arabic</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <ul class="topsocial">
+                        <li><a target="_blank" href="https://www.facebook.com/"><i class="nss-facebook-f"></i></a></li>
+                        <li><a target="_blank" href="https://twitter.com/"><i class="nss-twitter"></i></a></li>
+                        <li><a target="_blank" href="https://www.google.com/"><i class="nss-google-plus-g"></i></a></li>
+                        <li><a target="_blank" href="https://www.instagram.com/"><i class="nss-instagram"></i></a></li>
                     </ul>
-                    <partial name="_LoginPartial" />
                 </div>
             </div>
-        </nav>
+        </div>
+    </section>
+    <!-- Topbar End -->
+    <!-- Header Start -->
+    <header class="header-01 h3 head-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <nav class="navbar navbar-expand-lg">
+                        <!-- logo Start-->
+                        <a class="navbar-brand" href="index-2.html">
+                            <img src="/assets/images/logo.png" alt="logo">
+                        </a>
+                        <!-- logo End-->
+                        <!-- Moblie Btn Start -->
+                        <button class="navbar-toggler" type="button">
+                            <i class="nss-bars1"></i>
+                        </button>
+                        <!-- Moblie Btn End -->
+                        <!-- Nav Menu Start -->
+                        <div class="collapse navbar-collapse">
+                            <ul class="navbar-nav">
+                                <li class="menu-item-has-children">
+                                    <a href="javascript:void(0);">Home</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="index-2.html">Home One</a></li>
+                                        <li><a href="index-3.html">Home Two</a></li>
+                                        <li><a href="index-4.html">Home Three</a></li>
+                                    </ul>
+                                </li>
+                                <li class="menu-item-has-children">
+                                    <a href="javascript:void(0);">Shop</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="shop-1.html">Product Full Width</a></li>
+                                        @* <a asp-controller="Cats" asp-action="Edit" asp-route-id="@cat.Id" class="btn btn-primary">Edit</a> *@
+                                        <li><a asp-controller="Shop" asp-action="Shop">Product Left Sidebar</a></li>
+                                        <li><a href="shop-3.html">Product Right Sidebar</a></li>
+                                        <li><a href="single-product.html">Single Product</a></li>
+                                        <li><a href="cart.html">Cart Page</a></li>
+                                        <li><a href="checkout.html">Checkout Page</a></li>
+                                        <li><a href="wishlist.html">Wishlist Page</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="about.html">About</a>
+                                </li>
+                                <li class="menu-item-has-children">
+                                    <a href="javascript:void(0);">Pages</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="faq.html">Faq Page</a></li>
+                                        <li><a href="404.html">404 Page</a></li>
+                                    </ul>
+                                </li>
+                                <li class="menu-item-has-children">
+                                    <a href="javascript:void(0);">Blog</a>
+                                    <ul class="sub-menu">
+                                        <li><a href="blog.html">Blog List</a></li>
+                                        <li><a href="blog-2.html">Blog Grid</a></li>
+                                        <li><a href="single-blog.html">Blog Details</a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a href="contact.html">Contact</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- Nav Menu End -->
+                        <!-- Btn -->
+                        <div class="access-btn">
+                            <a href="javascript:void(0);" class="btn-search"><i class="nss-search1"></i></a>
+                            <a href="account.html" class="btn-user"><i class="nss-user1"></i></a>
+                            <a href="wishlist.html" class="btn-wishlist"><i class="nss-heart1"></i><span>1</span></a>
+                            <a href="cart.html" class="btn-cart"><i class="nss-shopping-cart1"></i><span>1</span></a>
+                        </div>
+                        <!-- Btn -->
+                    </nav>
+                </div>
+            </div>
+        </div>
     </header>
-    <div class="container">
+    <!-- Header End -->
+    <!-- Popup Search Start -->
+    <section class="popup_search_sec">
+        <div class="popup_search_overlay"></div>
+        <div class="pop_search_background">
+            <div class="middle_search">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 text-center">
+                            <div class="popup_search_form">
+                                <form method="get" action="#">
+                                    <input type="search" name="s" id="s" placeholder="Type Words and Hit Enter">
+                                    <button type="submit"><i class="nss-search1"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Popup Search End -->
+
+    <div class="">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <!-- Footer Start -->
+    <footer class="footer">
         <div class="container">
-            &copy; 2024 - SpinningWebApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <aside class="widget">
+                        <div class="about-widget">
+                            <a href="index-2.html"><img src="assets/images/logo.png" alt="logo"></a>
+                            <p>Lorem ipsum dolor sit amet,<br> consectetur adipiscing elit. Duis at<br> est id leo luctus gravida a in ipsum.</p>
+                            <div class="ab-social">
+                                <a class="fac" target="_blank" href="https://www.facebook.com/"><i class="nss-facebook-f"></i></a>
+                                <a class="twi" target="_blank" href="https://www.twitter.com/"><i class="nss-twitter"></i></a>
+                                <a class="you" target="_blank" href="https://www.youtube.com/"><i class="nss-youtube"></i></a>
+                                <a class="ins" target="_blank" href="https://www.instagram.com/"><i class="nss-instagram"></i></a>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <aside class="widget">
+                        <h3 class="widget-title">Useful Links</h3>
+                        <ul>
+                            <li><a href="index-4.html">Home</a></li>
+                            <li><a href="index-4.html">User</a></li>
+                            <li><a href="index-4.html">Our Pricing</a></li>
+                            <li><a href="index-4.html">Testimonials</a></li>
+                            <li><a href="index-4.html">News</a></li>
+                        </ul>
+                    </aside>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <aside class="widget">
+                        <h3 class="widget-title">Why Buy From Us</h3>
+                        <ul>
+                            <li><a href="index-4.html">Shipping & Delivery</a></li>
+                            <li><a href="index-4.html">Secure Payment</a></li>
+                            <li><a href="index-4.html">Support</a></li>
+                            <li><a href="index-4.html">Stores</a></li>
+                            <li><a href="index-4.html">Services</a></li>
+                            <li><a href="index-4.html">Returns</a></li>
+                        </ul>
+                    </aside>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <aside class="widget widget_mc4wp_form_widget">
+                        <h3 class="widget-title">Subscribe</h3>
+                        <form class="mc4wp-form" method="post">
+                            <input type="email" name="EMAIL" placeholder="Email" required="">
+                            <input type="submit" value="Subscribe">
+                        </form>
+                    </aside>
+                    <p>Get the latest updates via email. Any time you may unsubscribe</p>
+                </div>
+            </div>
+            <!-- Copryrgint Start -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="copyright text-center">
+                        <p>© 2021 <a href="https://psdtowpwork.com/">Nsstheme.</a> All rights reserved.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Copryrgint End -->
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <!-- Footer End -->
+    <!-- Start Include All JS -->
+    <script src="~/assets/js/jquery.js"></script>
+    <script src="~/assets/js/bootstrap.min.js"></script>
+    <script src="~/assets/js/jquery.appear.js"></script>
+    <script src="~/assets/js/owl.carousel.min.js"></script>
+    <script src="~/assets/js/slick.js"></script>
+    <script src="~/assets/js/lightcase.js"></script>
+    <script src="~/assets/js/jquery-ui.js"></script>
+    <script src="~/assets/js/theme.js"></script>
+    <!-- End Include All JS -->
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

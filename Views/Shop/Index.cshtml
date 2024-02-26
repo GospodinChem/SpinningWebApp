@@ -1,0 +1,530 @@
+﻿@model IEnumerable<SpinningWebApp.Models.CategoryViewModel>
+
+@{
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from psdtowpwork.com/html/fisto/shop-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 14 Feb 2024 08:57:39 GMT -->
+<head>
+    <title>Fisto - Fishing and Hunting Hobby Accessories store HTML5 Responsive Template</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+
+    <!-- Start Include All CSS -->
+    <link rel="stylesheet" href="~/assets/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/assets/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="~/assets/css/elegant-icons.css" />
+    <link rel="stylesheet" href="~/assets/css/fishto-icons.css" />
+    <link rel="stylesheet" href="~/assets/css/animate.css" />
+    <link rel="stylesheet" href="~/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/assets/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/assets/css/slick.css">
+    <link rel="stylesheet" href="~/assets/css/lightcase.css">
+    <link rel="stylesheet" href="~/assets/css/theme.css" />
+    <link rel="stylesheet" href="~/assets/css/responsive.css" />
+    <!-- End Include All CSS -->
+    <!-- Favicon Icon -->
+    <link rel="icon" type="image/png" href="~/assets/images/favicon.png">
+    <!-- Favicon Icon -->
+</head>
+<body>
+
+    <!-- Preloader Start -->
+    <div class="preloader">
+        <div class='circle'>
+            <div class="circle-cutter"></div>
+            <div class="circle-inner"></div>
+        </div>
+    </div>
+    <!-- Preloader Start -->
+    <!-- Hero Banner Start -->
+    <section class="page_banner" style="background-image: url(assets/images/banner.jpg);">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="pb_title">Product Left Sidebar</h3>
+                    <div class="page_crumb">
+                        <a href="index-2.html">Home</a> | <span>Product</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Banner End -->
+    <!-- Shop Start -->
+    <section class="shoppage-setion">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="shop-sidebar">
+                        <aside class="widget widget-search">
+                            <form class="search-form" action="#" method="post">
+                                <input type="search" name="s" placeholder="Enter keyword">
+                                <button type="submit" value="Search"><i class="nss-search"></i></button>
+                            </form>
+                        </aside>
+                        <aside class="widget">
+                            <h3 class="widget-title">Категории</h3>
+                            <ul>
+                                @if (Model != null && Model.Any())
+                                {
+                                    foreach (var item in Model)
+                                    {
+                                        <li><a href="shop-2.html">@item.Name</a> 12</li>
+                                    }
+                                }
+                                else
+                                {
+                                    <li>There are no categories.</li>
+                                }
+                            </ul>
+                        </aside>
+                        <aside class="widget">
+                            <h3 class="widget-title">Filter</h3>
+                            <div class="price_slider_wrapper">
+                                <form action="#" method="get" class="clearfix">
+                                    <div id="slider-range"></div>
+                                </form>
+                            </div>
+                        </aside>
+                        <aside class="widget">
+                            <h3 class="widget-title">Best Sellers</h3>
+                            <div class="best-sale-item">
+                                <img src="assets/images/product/b1.png" alt="product">
+                                <a href="single-product.html">Fishing Foldable</a>
+                                <div class="product_price clearfix"><span class="price"><span><span>$</span>35.00</span></span></div>
+                            </div>
+                            <div class="best-sale-item">
+                                <img src="assets/images/product/b2.png" alt="product">
+                                <a href="single-product.html">Net Fishing Nets</a>
+                                <div class="product_price clearfix"><span class="price"><span><span>$</span>15.00</span></span></div>
+                            </div>
+                            <div class="best-sale-item">
+                                <img src="assets/images/product/b3.png" alt="product">
+                                <a href="single-product.html">Telescoping Pole Handle</a>
+                                <div class="product_price clearfix"><span class="price"><span><span>$</span>32.00</span></span></div>
+                            </div>
+                        </aside>
+                        <aside class="widget">
+                            <h3 class="widget-title">Product tags</h3>
+                            <div class="tagcloud">
+                                <a href="#">Handle</a><a href="#">Fishing</a><a href="#">Reels</a><a href="#">Nets</a><a href="#">Safe</a>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-12">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <ul class="toolbar-btn nav nav-tabs">
+                                <li><a class="active" href="#gird" data-toggle="tab"><span></span><span></span><span></span><span></span></a></li>
+                                <li><a class="list" href="#list" data-toggle="tab"><span></span><span></span><span></span></a></li>
+                            </ul>
+                            <p class="show-result">Showing all 15 results</p>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="sorting">
+                                <select name="orderby" class="orderby">
+                                    <option value="sorting" selected="selected">Default sorting</option>
+                                    <option value="new">Newest Products</option>
+                                    <option value="popular">Popular Products</option>
+                                    <option value="rating">Average Rating</option>
+                                    <option value="price">Price: Low to High</option>
+                                    <option value="price-desc">Price: High to Low</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tab Content -->
+                    <div class="tab-content">
+                        <!-- Grid View -->
+                        <div class="tab-pane fade show in active" id="gird" role="tabpanel">
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="product-item-1 text-center">
+                                        <div class="product-thumb">
+                                            <img src="assets/images/product/1.png" alt="product">
+                                            <div class="product-meta">
+                                                <a href="single-product.html" class="view"><i class="nss-eye1"></i></a>
+                                                <a href="wishlist.html" class="whishlist"><i class="nss-heart1"></i></a>
+                                            </div>
+                                            <a class="add-to-cart" href="cart.html"><i class="nss-shopping-cart1"></i>Add To Cart</a>
+                                        </div>
+                                        <div class="product-details">
+                                            <h5><a href="single-product.html">Fishing Retractable</a></h5>
+                                            <div class="ratings">
+                                                <i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><span>( 1 )</span>
+                                            </div>
+                                            <div class="product_price clearfix"><span class="price"><span><span>$</span>40.00</span></span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="product-item-1 text-center">
+                                        <div class="product-thumb">
+                                            <img src="assets/images/product/2.png" alt="product">
+                                            <div class="product-meta">
+                                                <a href="single-product.html" class="view"><i class="nss-eye1"></i></a>
+                                                <a href="wishlist.html" class="whishlist"><i class="nss-heart1"></i></a>
+                                            </div>
+                                            <a class="add-to-cart" href="cart.html"><i class="nss-shopping-cart1"></i>Add To Cart</a>
+                                        </div>
+                                        <div class="product-details">
+                                            <h5><a href="single-product.html">Fishing Reels</a></h5>
+                                            <div class="ratings">
+                                                <i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><span>( 1 )</span>
+                                            </div>
+                                            <div class="product_price clearfix"><span class="price"><span><span>$</span>120.00</span></span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="product-item-1 text-center">
+                                        <div class="product-thumb">
+                                            <img src="assets/images/product/3.png" alt="product">
+                                            <div class="product-meta">
+                                                <a href="single-product.html" class="view"><i class="nss-eye1"></i></a>
+                                                <a href="wishlist.html" class="whishlist"><i class="nss-heart1"></i></a>
+                                            </div>
+                                            <a class="add-to-cart" href="cart.html"><i class="nss-shopping-cart1"></i>Add To Cart</a>
+                                        </div>
+                                        <div class="product-details">
+                                            <h5><a href="single-product.html">Net Fishing Nets</a></h5>
+                                            <div class="ratings">
+                                                <i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><span>( 1 )</span>
+                                            </div>
+                                            <div class="product_price clearfix"><span class="price"><span><span>$</span>10.00</span></span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="product-item-1 text-center">
+                                        <div class="product-thumb">
+                                            <img src="assets/images/product/4.png" alt="product">
+                                            <div class="product-meta">
+                                                <a href="single-product.html" class="view"><i class="nss-eye1"></i></a>
+                                                <a href="wishlist.html" class="whishlist"><i class="nss-heart1"></i></a>
+                                            </div>
+                                            <a class="add-to-cart" href="cart.html"><i class="nss-shopping-cart1"></i>Add To Cart</a>
+                                        </div>
+                                        <div class="product-details">
+                                            <h5><a href="single-product.html">Telescoping Pole Handle</a></h5>
+                                            <div class="ratings">
+                                                <i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><span>( 1 )</span>
+                                            </div>
+                                            <div class="product_price clearfix"><span class="price"><span><span>$</span>43.00</span></span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="product-item-1 text-center">
+                                        <div class="product-thumb">
+                                            <img src="assets/images/product/5.png" alt="product">
+                                            <div class="product-meta">
+                                                <a href="single-product.html" class="view"><i class="nss-eye1"></i></a>
+                                                <a href="wishlist.html" class="whishlist"><i class="nss-heart1"></i></a>
+                                            </div>
+                                            <a class="add-to-cart" href="cart.html"><i class="nss-shopping-cart1"></i>Add To Cart</a>
+                                        </div>
+                                        <div class="product-details">
+                                            <h5><a href="single-product.html">Telescopic Fishing</a></h5>
+                                            <div class="ratings">
+                                                <i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><span>( 1 )</span>
+                                            </div>
+                                            <div class="product_price clearfix"><span class="price"><span><span>$</span>67.00</span></span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="product-item-1 text-center">
+                                        <div class="product-thumb">
+                                            <img src="assets/images/product/6.png" alt="product">
+                                            <div class="product-meta">
+                                                <a href="single-product.html" class="view"><i class="nss-eye1"></i></a>
+                                                <a href="wishlist.html" class="whishlist"><i class="nss-heart1"></i></a>
+                                            </div>
+                                            <a class="add-to-cart" href="cart.html"><i class="nss-shopping-cart1"></i>Add To Cart</a>
+                                        </div>
+                                        <div class="product-details">
+                                            <h5><a href="single-product.html">Fishing Foldable</a></h5>
+                                            <div class="ratings">
+                                                <i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><span>( 1 )</span>
+                                            </div>
+                                            <div class="product_price clearfix"><span class="price"><span><span>$</span>65.00</span></span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="product-item-1 text-center">
+                                        <div class="product-thumb">
+                                            <img src="assets/images/product/7.png" alt="product">
+                                            <div class="product-meta">
+                                                <a href="single-product.html" class="view"><i class="nss-eye1"></i></a>
+                                                <a href="wishlist.html" class="whishlist"><i class="nss-heart1"></i></a>
+                                            </div>
+                                            <a class="add-to-cart" href="cart.html"><i class="nss-shopping-cart1"></i>Add To Cart</a>
+                                        </div>
+                                        <div class="product-details">
+                                            <h5><a href="single-product.html">Durable Nylon Mesh</a></h5>
+                                            <div class="ratings">
+                                                <i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><span>( 1 )</span>
+                                            </div>
+                                            <div class="product_price clearfix"><span class="price"><span><span>$</span>65.00</span></span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="product-item-1 text-center">
+                                        <div class="product-thumb">
+                                            <img src="assets/images/product/8.png" alt="product">
+                                            <div class="product-meta">
+                                                <a href="single-product.html" class="view"><i class="nss-eye1"></i></a>
+                                                <a href="wishlist.html" class="whishlist"><i class="nss-heart1"></i></a>
+                                            </div>
+                                            <a class="add-to-cart" href="cart.html"><i class="nss-shopping-cart1"></i>Add To Cart</a>
+                                        </div>
+                                        <div class="product-details">
+                                            <h5><a href="single-product.html">Safe Fish Catching</a></h5>
+                                            <div class="ratings">
+                                                <i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><span>( 1 )</span>
+                                            </div>
+                                            <div class="product_price clearfix"><span class="price"><span><span>$</span>34.00</span></span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="product-item-1 text-center">
+                                        <div class="product-thumb">
+                                            <img src="assets/images/product/9.png" alt="product">
+                                            <div class="product-meta">
+                                                <a href="single-product.html" class="view"><i class="nss-eye1"></i></a>
+                                                <a href="wishlist.html" class="whishlist"><i class="nss-heart1"></i></a>
+                                            </div>
+                                            <a class="add-to-cart" href="cart.html"><i class="nss-shopping-cart1"></i>Add To Cart</a>
+                                        </div>
+                                        <div class="product-details">
+                                            <h5><a href="single-product.html">Fishing Retractable</a></h5>
+                                            <div class="ratings">
+                                                <i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><span>( 1 )</span>
+                                            </div>
+                                            <div class="product_price clearfix"><span class="price"><span><span>$</span>115.00</span></span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 fishto-pagination text-center">
+                                    <a class="next" href="shop-2.html"><i class="nss-chevron-left1"></i></a>
+                                    <span class="current">1</span>
+                                    <a href="shop-2.html">2</a>
+                                    <a href="shop-2.html">3</a>
+                                    <a href="shop-2.html">...</a>
+                                    <a href="shop-2.html">10</a>
+                                    <a class="next" href="shop-2.html"><i class="nss-chevron-right1"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Grid View -->
+                        <!-- List View -->
+                        <div class="tab-pane fade in" id="list" role="tabpanel">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="product-list-view">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-5">
+                                                <div class="product-thumb">
+                                                    <img src="assets/images/product/1.png" alt="product">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8 col-md-7">
+                                                <div class="product-details">
+                                                    <h5><a href="single-product.html">Fishing Retractable</a></h5>
+                                                    <div class="ratings">
+                                                        <i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><span>( 1 )</span>
+                                                    </div>
+                                                    <div class="product_price clearfix"><span class="price"><span><span>$</span>40.00</span></span></div>
+                                                    <p>
+                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at est id leo luctus gravida a in ipsum. Vivamus vel molestie nisipsum. Vivamus vel moles
+                                                    </p>
+                                                    <div class="listing-meta">
+                                                        <a class="add-to-cart" href="cart.html"><i class="nss-shopping-cart1"></i>Add To Cart</a>
+                                                        <a href="single-product.html" class="view"><i class="nss-eye1"></i></a>
+                                                        <a href="wishlist.html" class="whishlist"><i class="nss-heart1"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-list-view">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-5">
+                                                <div class="product-thumb">
+                                                    <img src="assets/images/product/2.png" alt="product">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8 col-md-7">
+                                                <div class="product-details">
+                                                    <h5><a href="single-product.html">Fishing Reels</a></h5>
+                                                    <div class="ratings">
+                                                        <i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><span>( 1 )</span>
+                                                    </div>
+                                                    <div class="product_price clearfix"><span class="price"><span><span>$</span>120.00</span></span></div>
+                                                    <p>
+                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at est id leo luctus gravida a in ipsum. Vivamus vel molestie nisipsum. Vivamus vel moles
+                                                    </p>
+                                                    <div class="listing-meta">
+                                                        <a class="add-to-cart" href="cart.html"><i class="nss-shopping-cart1"></i>Add To Cart</a>
+                                                        <a href="single-product.html" class="view"><i class="nss-eye1"></i></a>
+                                                        <a href="wishlist.html" class="whishlist"><i class="nss-heart1"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-list-view">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-5">
+                                                <div class="product-thumb">
+                                                    <img src="assets/images/product/3.png" alt="product">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8 col-md-7">
+                                                <div class="product-details">
+                                                    <h5><a href="single-product.html">Net Fishing Nets</a></h5>
+                                                    <div class="ratings">
+                                                        <i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><span>( 1 )</span>
+                                                    </div>
+                                                    <div class="product_price clearfix"><span class="price"><span><span>$</span>10.00</span></span></div>
+                                                    <p>
+                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at est id leo luctus gravida a in ipsum. Vivamus vel molestie nisipsum. Vivamus vel moles
+                                                    </p>
+                                                    <div class="listing-meta">
+                                                        <a class="add-to-cart" href="cart.html"><i class="nss-shopping-cart1"></i>Add To Cart</a>
+                                                        <a href="single-product.html" class="view"><i class="nss-eye1"></i></a>
+                                                        <a href="wishlist.html" class="whishlist"><i class="nss-heart1"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-list-view">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-5">
+                                                <div class="product-thumb">
+                                                    <img src="assets/images/product/4.png" alt="product">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8 col-md-7">
+                                                <div class="product-details">
+                                                    <h5><a href="single-product.html">Telescoping Pole Handle</a></h5>
+                                                    <div class="ratings">
+                                                        <i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><span>( 1 )</span>
+                                                    </div>
+                                                    <div class="product_price clearfix"><span class="price"><span><span>$</span>25.00</span></span></div>
+                                                    <p>
+                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at est id leo luctus gravida a in ipsum. Vivamus vel molestie nisipsum. Vivamus vel moles
+                                                    </p>
+                                                    <div class="listing-meta">
+                                                        <a class="add-to-cart" href="cart.html"><i class="nss-shopping-cart1"></i>Add To Cart</a>
+                                                        <a href="single-product.html" class="view"><i class="nss-eye1"></i></a>
+                                                        <a href="wishlist.html" class="whishlist"><i class="nss-heart1"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-list-view">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-5">
+                                                <div class="product-thumb">
+                                                    <img src="assets/images/product/5.png" alt="product">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8 col-md-7">
+                                                <div class="product-details">
+                                                    <h5><a href="single-product.html">Telescopic Fishing</a></h5>
+                                                    <div class="ratings">
+                                                        <i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><span>( 1 )</span>
+                                                    </div>
+                                                    <div class="product_price clearfix"><span class="price"><span><span>$</span>35.00</span></span></div>
+                                                    <p>
+                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at est id leo luctus gravida a in ipsum. Vivamus vel molestie nisipsum. Vivamus vel moles
+                                                    </p>
+                                                    <div class="listing-meta">
+                                                        <a class="add-to-cart" href="cart.html"><i class="nss-shopping-cart1"></i>Add To Cart</a>
+                                                        <a href="single-product.html" class="view"><i class="nss-eye1"></i></a>
+                                                        <a href="wishlist.html" class="whishlist"><i class="nss-heart1"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-list-view">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-5">
+                                                <div class="product-thumb">
+                                                    <img src="assets/images/product/6.png" alt="p">
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-8 col-md-7">
+                                                <div class="product-details">
+                                                    <h5><a href="single-product.html">Fishing Foldable</a></h5>
+                                                    <div class="ratings">
+                                                        <i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><span>( 1 )</span>
+                                                    </div>
+                                                    <div class="product_price clearfix"><span class="price"><span><span>$</span>65.00</span></span></div>
+                                                    <p>
+                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at est id leo luctus gravida a in ipsum. Vivamus vel molestie nisipsum. Vivamus vel moles
+                                                    </p>
+                                                    <div class="listing-meta">
+                                                        <a class="add-to-cart" href="cart.html"><i class="nss-shopping-cart1"></i>Add To Cart</a>
+                                                        <a href="single-product.html" class="view"><i class="nss-eye1"></i></a>
+                                                        <a href="wishlist.html" class="whishlist"><i class="nss-heart1"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 fishto-pagination text-center">
+                                    <a class="next" href="shop-2.html"><i class="nss-chevron-left1"></i></a>
+                                    <span class="current">1</span>
+                                    <a href="shop-2.html">2</a>
+                                    <a href="shop-2.html">3</a>
+                                    <a href="shop-2.html">...</a>
+                                    <a href="shop-2.html">10</a>
+                                    <a class="next" href="shop-2.html"><i class="nss-chevron-right1"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- List View -->
+                    </div>
+                    <!-- Tab Content -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Shop End -->
+    <!-- Back To Top -->
+    <a href="#" id="back-to-top">
+        <i class="arrow_carrot-2up"></i>
+    </a>
+    <!-- Back To Top -->
+    <!-- Start Include All JS -->
+    <script src="/assets/js/jquery.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/jquery.appear.js"></script>
+    <script src="/assets/js/owl.carousel.min.js"></script>
+    <script src="/assets/js/slick.js"></script>
+    <script src="/assets/js/lightcase.js"></script>
+    <script src="/assets/js/jquery-ui.js"></script>
+    <script src="/assets/js/theme.js"></script>
+    <!-- End Include All JS -->
+
+</body>
+
+<!-- Mirrored from psdtowpwork.com/html/fisto/shop-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 14 Feb 2024 08:57:40 GMT -->
+</html>

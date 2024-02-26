@@ -1,6 +1,15 @@
-﻿namespace SpinningWebApp.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace SpinningWebApp.Models
 {
     public class LoginViewModel
     {
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; } = null!;
+
+        [Required]
+        [DataType(DataType.Password)]
+        public string Password { get; set; } = null!;
     }
 }
