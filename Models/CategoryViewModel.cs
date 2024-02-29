@@ -10,5 +10,8 @@ namespace SpinningWebApp.Models
         [Required]
         [StringLength(50)]
         public string Name { get; set; } = null!;
+
+        [Required]
+        public int ProductsCount { get; set; }
     }
 }

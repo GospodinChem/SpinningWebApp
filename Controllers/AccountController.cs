@@ -36,7 +36,8 @@ namespace SpinningWebApp.Controllers
                 Email = viewModel.Email,
                 FirstName = viewModel.FirstName,
                 LastName = viewModel.LastName,
-                UserName = viewModel.Email
+                UserName = viewModel.Email,
+                City = viewModel.City
             };
 
             var result = await userManager.CreateAsync(user, viewModel.Password);

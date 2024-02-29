@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SpinningWebApp.Contracts;
+using SpinningWebApp.Models;
 
 namespace SpinningWebApp.Controllers
 {
@@ -13,15 +14,29 @@ namespace SpinningWebApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? categoryName = null, string? sortType = null)
         {
-            var model = await shopService.GetCategoriesAsync();
+            var categories = await shopService.GetCategoriesAsync();
 
-            if (model != null)
+            if (categoryName == null)
             {
-                return View("Index", model);
+                categoryName = "Въдици";
             }
-            return View("Index", "Home");
+
+            if (categories != null)
+            {
+                ViewBag.Categories = categories;
+
+                var category = await shopService.GetCategoryByName(categoryName);
+
+                if (category != null)
+                {
+                    return View("Index", category);
+                }
+            }
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }
+

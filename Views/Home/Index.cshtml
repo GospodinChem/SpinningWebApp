@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@model IEnumerable<SpinningWebApp.Models.CategoryViewModel>
+
+<!DOCTYPE html>
 <html lang="en">
 
 <!-- Mirrored from psdtowpwork.com/html/fisto/index-3.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 14 Feb 2024 08:57:36 GMT -->
@@ -56,48 +58,28 @@
                 <div class="col-lg-12">
                     <div class="cate-wrapper-2">
                         <div class="row">
-                            <div class="col-lg-4 col-md-6">
-                                <div class="cate-item-icon-2">
-                                    <a href="shop-1.html"><i class="fishto-hookfishto"></i></a>
-                                    <a class="ct" href="shop-1.html">Fishing Reels</a>
-                                    <span>76 Item</span>
-                                </div>
+                            @* <div class="col-lg-4 col-md-6">
+                            <div class="cate-item-icon-2">
+                            <a href="shop-1.html"><i class="fishto-rod1fishto"></i></a>
+                            <a class="ct" href="shop-1.html">Fishing Reels</a>
+                            <span>76 Item</span>
                             </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="cate-item-icon-2">
-                                    <a href="shop-1.html"><i class="fishto-tridentfishto"></i></a>
-                                    <a class="ct" href="shop-1.html">Landing Net</a>
-                                    <span>65 Item</span>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="cate-item-icon-2">
-                                    <a href="shop-1.html"><i class="fishto-rod1fishto"></i></a>
-                                    <a class="ct" href="shop-1.html">Baitcasting</a>
-                                    <span>55 Item</span>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="cate-item-icon-2">
-                                    <a href="shop-1.html"><i class="fishto-boatfishto"></i></a>
-                                    <a class="ct" href="shop-1.html">Fishing Boat</a>
-                                    <span>18 Item</span>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="cate-item-icon-2">
-                                    <a href="shop-1.html"><i class="fishto-fishing-net1fishto"></i></a>
-                                    <a class="ct" href="shop-1.html">Landing Net</a>
-                                    <span>24 Item</span>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-6">
-                                <div class="cate-item-icon-2">
-                                    <a href="shop-1.html"><i class="fishto-bootfishto"></i></a>
-                                    <a class="ct" href="shop-1.html">Fishing Pliers</a>
-                                    <span>30 Item</span>
-                                </div>
-                            </div>
+                            </div> *@
+
+                            @if (Model != null && Model.Any())
+                            {
+                                foreach (var item in Model)
+                                {
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="cate-item-icon-2">
+                                            <a asp-controller="Shop" asp-action="Index" asp-route-id="@item.Id"><i class="fishto-rod1fishto"></i></a>
+                                            <a asp-controller="Shop" asp-action="Index" asp-route-id="@item.Id" class="ct">@item.Name</a>
+                                            <span>@item.ProductsCount Продукта</span>
+                                        </div>
+                                    </div>
+                                }
+                            }
+
                         </div>
                     </div>
                 </div>
