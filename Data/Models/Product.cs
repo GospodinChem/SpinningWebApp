@@ -22,6 +22,9 @@ namespace SpinningWebApp.Data.Models
         [StringLength(1500)]
         public string Description { get; set; } = null!;
 
+        [Required]
+        public string MainImageURL { get; set; } = null !;
+
         [ForeignKey("Manufacturer")]
         public Guid ManufacturerId { get; set; }
         public Manufacturer Manufacturer { get; set; } = null!;

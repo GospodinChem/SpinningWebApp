@@ -44,7 +44,7 @@ namespace SpinningWebApp.Data
             builder.ApplyConfiguration(new CategoryConfiguration());
             builder.ApplyConfiguration(new ManufacturerConfiguration());
             builder.ApplyConfiguration(new ProductConfiguration());
-            builder.ApplyConfiguration(new ImagesConfiguration());
+            //builder.ApplyConfiguration(new ImagesConfiguration());
             builder.ApplyConfiguration(new SpecificationConfiguration());
             builder.ApplyConfiguration(new ProductSpecificationConfiguration());
 

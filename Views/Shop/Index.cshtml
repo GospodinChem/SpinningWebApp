@@ -1,7 +1,9 @@
 ﻿@model SpinningWebApp.Data.Models.Category
 
 @{
+    ViewData["Title"] = "";
 }
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -148,7 +150,7 @@
                                         <div class="col-lg-4 col-md-6">
                                             <div class="product-item-1 text-center">
                                                 <div class="product-thumb">
-                                                    <img src="" alt="product">
+                                                    <img src="@item.MainImageURL" alt="product">
                                                     <div class="product-meta">
                                                         <a href="single-product.html" class="view"><i class="nss-eye1"></i></a>
                                                         <a href="wishlist.html" class="whishlist"><i class="nss-heart1"></i></a>
@@ -156,7 +158,36 @@
                                                     <a class="add-to-cart" href="cart.html"><i class="nss-shopping-cart1"></i>Add To Cart</a>
                                                 </div>
                                                 <div class="product-details">
-                                                    <h5><a href="single-product.html">@item.Model</a></h5>
+                                                    @switch (item.Category.Name)
+                                                    {
+                                                        case "Аксесоари":
+                                                            <h5><a href="single-product.html">@item.Manufacturer.Name  @item.Model</a></h5>
+                                                            break;
+                                                        case "Блесни":
+                                                            <h5><a href="single-product.html">Блесна @item.Manufacturer.Name  @item.Model</a></h5>
+                                                            break;
+                                                        case "Влакна":
+                                                            <h5><a href="single-product.html">Влакно @item.Manufacturer.Name  @item.Model</a></h5>
+                                                            break;
+                                                        case "Воблери":
+                                                            <h5><a href="single-product.html">Воблер @item.Manufacturer.Name @item.Model</a></h5>
+                                                            break;
+                                                        case "Въдици":
+                                                            <h5><a href="single-product.html">Въдица @item.Manufacturer.Name @item.Model</a></h5>
+                                                            break;
+                                                        case "Джиг Глави":
+                                                            <h5><a href="single-product.html">Джиг глава @item.Manufacturer.Name @item.Model</a></h5>
+                                                            break;
+                                                        case "Куки":
+                                                            <h5><a href="single-product.html">Кука @item.Manufacturer.Name @item.Model</a></h5>
+                                                            break;
+                                                        case "Макари":
+                                                            <h5><a href="single-product.html">Макара @item.Manufacturer.Name @item.Model</a></h5>
+                                                            break;
+                                                        case "Силикони":
+                                                            <h5><a href="single-product.html">Силикон @item.Manufacturer.Name @item.Model</a></h5>
+                                                            break;
+                                                    }
                                                     <div class="ratings">
                                                         <i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><span>( 1 )</span>
                                                     </div>

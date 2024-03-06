@@ -5,6 +5,7 @@
     "Price": "1453.50",
     "AvailableAmount": "12",
     "Description": "Mn qka makara kurti paveta",
+    "MainImageURL": "https://fishingzone.bg/thumbs/1/2301271942421.jpg",
     "ManufacturerId": "F21230E5-9600-4113-BC2A-18C01AFFDF26",
     "CategoryId": "9F63652A-FB08-43D0-AC49-A2A281C359F9"
   },
@@ -14,6 +15,7 @@
     "Price": "419.00",
     "AvailableAmount": "16",
     "Description": "Giga ceps vudica",
+    "MainImageURL": "https://fishingzone.bg/thumbs/1/2312281539051.jpg",
     "ManufacturerId": "FE6692DA-6330-4C1A-A5E2-512596CD54A1",
     "CategoryId": "ACBD3CDE-F96E-4A60-955E-7290A41F155C"
   },
@@ -23,6 +25,7 @@
     "Price": "32.90",
     "AvailableAmount": "20",
     "Description": "Brutaliika si e nqa da luja",
+    "MainImageURL": "https://fishingzone.bg/thumbs/1/2311101433471.jpg",
     "ManufacturerId": "48216279-E574-41C2-B631-F59AB5F07830",
     "CategoryId": "E4EA4F50-B25A-4BD9-9120-0DF23D58A544"
   }

@@ -12,7 +12,7 @@ namespace SpinningWebApp.Data.Models
 
         [Required]
         [StringLength(100)]
-        public string ImagePath { get; set; } = null!;
+        public string ImageURL { get; set; } = null!;
 
         [ForeignKey("Product")]
         public Guid ProductId { get; set; }

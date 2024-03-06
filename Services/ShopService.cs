@@ -42,7 +42,12 @@ namespace SpinningWebApp.Services
             var category = await dbContext.Categories
                 .Include(c => c.Products)
                 .FirstOrDefaultAsync(c => c.Name == categoryName);
-            
+
+            if (category != null)
+            {
+                category.Products = (ICollection<Product>) await GetProductsByCategoryAsync(categoryName);
+            }
+
             return category;
         }
 

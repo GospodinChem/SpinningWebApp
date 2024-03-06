@@ -1,17 +1,17 @@
 [
   {
     "Id": "5AE6CAEB-FC08-4C9B-B7F5-D07D0288E7A2",
-    "ImagePath": "~/images/savage-gear-revenge-sg6-medium-game.jpg",
+    "ImageURL": "https://fishingzone.bg/thumbs/1/2312281539051.jpg",
     "ProductId": "45B72494-1287-4EB6-B22B-4A672A9BD01C"
   },
   {
     "Id": "A88A85EE-0019-4B80-9026-12249E337303",
-    "ImagePath": "~/images/jackson-jester-minnow-78s.jpg",
+    "ImageURL": "https://fishingzone.bg/thumbs/1/2311101433471.jpg",
     "ProductId": "3AB3F6D1-F45D-4C80-B9AC-F4CADE704097"
   },
   {
     "Id": "BA00915B-4B65-45A1-A551-B58065A4AB6D",
-    "ImagePath": "~/images/shimano-stella-fk-4000xg.jpg",
+    "ImageURL": "https://fishingzone.bg/thumbs/1/2301271942421.jpg",
     "ProductId": "5AD1EA09-52EB-4296-8321-B278B06E920C"
   }
 ]
