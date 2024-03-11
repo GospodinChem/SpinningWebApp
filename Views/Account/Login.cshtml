@@ -75,20 +75,28 @@
             <div class="card mb-0">
               <div class="card-body">
                 <a href="./index.html" class="text-nowrap logo-img text-center d-block py-3 w-100">
-                  <img src="../assets/images/logos/dark-logo.svg" width="180" alt="">
+                  <img src="../assets/images/logos/dark-logo.svg" width="180" alt="logo">
                 </a>
                 <p class="text-center">Ус брат ме</p>
                 <form id="loginForm" method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>​
                   <div class="mb-3">
+                    <label asp-for="Email" class="form-label">Имейл</label>​
                     <input asp-for="Email" class="form-control" autocomplete="email" aria-required="true" />​
-                    <label asp-for="Email">Имейл</label>​
                     <span asp-validation-for="Email" class="text-danger"></span>​
                   </div>
                   <div class="mb-4">
+                     <label asp-for="Password" class="form-label">Парола</label>​
                      <input asp-for="Password" class="form-control" autocomplete="new-password" aria-required="true" />​
-                     <label asp-for="Password">Парола</label>​
                      <span asp-validation-for="Password" class="text-danger"></span>​
+                  </div>
+                  <div class="d-flex align-items-center justify-content-between mb-4">
+                    <div class="form-check">
+                      <input class="form-check-input primary" type="checkbox" value="" id="flexCheckChecked" checked>
+                      <label class="form-check-label text-dark" for="flexCheckChecked">
+                        Запомни на това устройство
+                      </label>
+                    </div>
                   </div>
                   <button id="loginSubmit" type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Впиши се</button>
                   <div class="d-flex align-items-center justify-content-center">
@@ -103,6 +111,10 @@
   </div>
   <script src="/assets/libs/jquery/dist/jquery.min.js"></script>
   <script src="/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+  @section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
 </body>
 
 </html>

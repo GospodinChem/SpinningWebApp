@@ -225,6 +225,7 @@ namespace SpinningWebApp.Migrations
                     Price = table.Column<double>(type: "float", nullable: false),
                     AvailableAmount = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(1500)", maxLength: 1500, nullable: false),
+                    MainImageURL = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ManufacturerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CategoryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
@@ -250,7 +251,7 @@ namespace SpinningWebApp.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ImagePath = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    ImageURL = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     ProductId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -373,22 +374,12 @@ namespace SpinningWebApp.Migrations
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "Id", "AvailableAmount", "CategoryId", "Description", "ManufacturerId", "Model", "Price" },
+                columns: new[] { "Id", "AvailableAmount", "CategoryId", "Description", "MainImageURL", "ManufacturerId", "Model", "Price" },
                 values: new object[,]
                 {
-                    { new Guid("3ab3f6d1-f45d-4c80-b9ac-f4cade704097"), 20, new Guid("e4ea4f50-b25a-4bd9-9120-0df23d58a544"), "Brutaliika si e nqa da luja", new Guid("48216279-e574-41c2-b631-f59ab5f07830"), "Jester Minnow 78S", 32.899999999999999 },
-                    { new Guid("45b72494-1287-4eb6-b22b-4a672a9bd01c"), 16, new Guid("acbd3cde-f96e-4a60-955e-7290a41f155c"), "Giga ceps vudica", new Guid("fe6692da-6330-4c1a-a5e2-512596cd54a1"), "Revenge SG6 Medium Game", 419.0 },
-                    { new Guid("5ad1ea09-52eb-4296-8321-b278b06e920c"), 12, new Guid("9f63652a-fb08-43d0-ac49-a2a281c359f9"), "Mn qka makara kurti paveta", new Guid("f21230e5-9600-4113-bc2a-18c01affdf26"), "Stella FK 4000XG ", 1453.5 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "Images",
-                columns: new[] { "Id", "ImagePath", "ProductId" },
-                values: new object[,]
-                {
-                    { new Guid("5ae6caeb-fc08-4c9b-b7f5-d07d0288e7a2"), "~/images/savage-gear-revenge-sg6-medium-game.jpg", new Guid("45b72494-1287-4eb6-b22b-4a672a9bd01c") },
-                    { new Guid("a88a85ee-0019-4b80-9026-12249e337303"), "~/images/jackson-jester-minnow-78s.jpg", new Guid("3ab3f6d1-f45d-4c80-b9ac-f4cade704097") },
-                    { new Guid("ba00915b-4b65-45a1-a551-b58065a4ab6d"), "~/images/shimano-stella-fk-4000xg.jpg", new Guid("5ad1ea09-52eb-4296-8321-b278b06e920c") }
+                    { new Guid("3ab3f6d1-f45d-4c80-b9ac-f4cade704097"), 20, new Guid("e4ea4f50-b25a-4bd9-9120-0df23d58a544"), "Brutaliika si e nqa da luja", "https://fishingzone.bg/thumbs/1/2311101433471.jpg", new Guid("48216279-e574-41c2-b631-f59ab5f07830"), "Jester Minnow 78S", 32.899999999999999 },
+                    { new Guid("45b72494-1287-4eb6-b22b-4a672a9bd01c"), 16, new Guid("acbd3cde-f96e-4a60-955e-7290a41f155c"), "Giga ceps vudica", "https://fishingzone.bg/thumbs/1/2312281539051.jpg", new Guid("fe6692da-6330-4c1a-a5e2-512596cd54a1"), "Revenge SG6 Medium Game", 419.0 },
+                    { new Guid("5ad1ea09-52eb-4296-8321-b278b06e920c"), 12, new Guid("9f63652a-fb08-43d0-ac49-a2a281c359f9"), "Mn qka makara kurti paveta", "https://fishingzone.bg/thumbs/1/2301271942421.jpg", new Guid("f21230e5-9600-4113-bc2a-18c01affdf26"), "Stella FK 4000XG ", 1453.5 }
                 });
 
             migrationBuilder.InsertData(

@@ -22,6 +22,11 @@ namespace SpinningWebApp.Services
                 .OrderBy(c => c.Name)
                 .ToListAsync();
 
+            if (categories == null)
+            {
+                throw new ArgumentNullException("Няма налични категории.");
+            }
+
             List<CategoryViewModel> models = new List<CategoryViewModel>();
 
             foreach (var category in categories)
@@ -40,12 +45,16 @@ namespace SpinningWebApp.Services
         public async Task<Category?> GetCategoryByName(string categoryName)
         {
             var category = await dbContext.Categories
-                .Include(c => c.Products)
                 .FirstOrDefaultAsync(c => c.Name == categoryName);
+
+            if (category == null)
+            {
+                throw new ArgumentException("Въведената категория не бе намерена.");
+            }
 
             if (category != null)
             {
-                category.Products = (ICollection<Product>) await GetProductsByCategoryAsync(categoryName);
+                category.Products = (ICollection<Product>)await GetProductsByCategoryAsync(categoryName);
             }
 
             return category;
@@ -58,6 +67,11 @@ namespace SpinningWebApp.Services
                 .Include(p => p.Manufacturer)
                 .Where(p => p.Category.Name == categoryName)
                 .ToListAsync();
+
+            if (products == null)
+            {
+                throw new ArgumentNullException("Няма продукти от дадената категория.");
+            }
 
             return products;
         }

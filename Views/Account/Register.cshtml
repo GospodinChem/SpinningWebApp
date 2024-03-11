@@ -32,28 +32,33 @@
                 <form id="registerForm" method="post">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>​
                   <div class="mb-3">
-                    <input asp-for="FirstName" class="form-control" autocomplete="firstname" aria-required="true" />​
-                    <label asp-for="FirstName">Име</label>​
+                    <label asp-for="FirstName" class ="form-label">Име</label>​
+                    <input asp-for="FirstName" class="form-control" autocomplete="firstname" aria-required="true" />​                    
                     <span asp-validation-for="FirstName" class="text-danger"></span>​
                   </div>
                   <div class="mb-3">
-                    <input asp-for="LastName" class="form-control" autocomplete="lastname" aria-required="true" />​
-                    <label asp-for="LastName">Фамилия</label>​
+                    <label asp-for="LastName" class ="form-label">Фамилия</label>​
+                    <input asp-for="LastName" class="form-control" autocomplete="lastname" aria-required="true" />​                    
                     <span asp-validation-for="LastName" class="text-danger"></span>​
                   </div>
                   <div class="mb-3">
-                    <input asp-for="Email" class="form-control" autocomplete="email" aria-required="true" />​
-                    <label asp-for="Email">Имейл</label>​
+                    <label asp-for="Email" class ="form-label">Имейл</label>​
+                    <input asp-for="Email" class="form-control" autocomplete="email" aria-required="true" />​                    
                     <span asp-validation-for="Email" class="text-danger"></span>​
                   </div>
+                  <div class="mb-3">
+                    <label asp-for="City" class ="form-label">Град</label>​
+                    <input asp-for="City" class="form-control" autocomplete="city" aria-required="true" />​                    
+                    <span asp-validation-for="City" class="text-danger"></span>​
+                  </div>
                   <div class="mb-4">
-                     <input asp-for="Password" class="form-control" autocomplete="new-password" aria-required="true" />​
-                     <label asp-for="Password">Парола</label>​
+                     <label asp-for="Password" class ="form-label">Парола</label>​
+                     <input asp-for="Password" class="form-control" autocomplete="new-password" aria-required="true" />​                     
                      <span asp-validation-for="Password" class="text-danger"></span>​
                   </div>
                   <div class="mb-4">
-                     <input asp-for="PasswordRepeat" class="form-control" autocomplete="new-password" aria-required="true" />​
-                     <label asp-for="PasswordRepeat">Повтори парола</label>​
+                     <label asp-for="PasswordRepeat" class ="form-label">Повтори парола</label>
+                     <input asp-for="PasswordRepeat" class="form-control" autocomplete="new-password" aria-required="true" />​                     ​
                      <span asp-validation-for="PasswordRepeat" class="text-danger"></span>​
                   </div>
                   <button id="registerSubmit" type="submit" class="btn btn-primary w-100 py-8 fs-4 mb-4 rounded-2">Регистрирай се</button>
@@ -71,6 +76,10 @@
   </div>
   <script src="/assets/libs/jquery/dist/jquery.min.js"></script>
   <script src="/assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+   @section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
 </body>
 
 </html>

@@ -12,7 +12,7 @@ using SpinningWebApp.Data;
 namespace SpinningWebApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240221072719_MigrationSpinningWebDb")]
+    [Migration("20240306165356_MigrationSpinningWebDb")]
     partial class MigrationSpinningWebDb
     {
         /// <inheritdoc />
@@ -20,7 +20,7 @@ namespace SpinningWebApp.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.0")
+                .HasAnnotation("ProductVersion", "8.0.2")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -305,6 +305,10 @@ namespace SpinningWebApp.Migrations
                         .HasMaxLength(1500)
                         .HasColumnType("nvarchar(1500)");
 
+                    b.Property<string>("MainImageURL")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<Guid>("ManufacturerId")
                         .HasColumnType("uniqueidentifier");
 
@@ -331,6 +335,7 @@ namespace SpinningWebApp.Migrations
                             AvailableAmount = 12,
                             CategoryId = new Guid("9f63652a-fb08-43d0-ac49-a2a281c359f9"),
                             Description = "Mn qka makara kurti paveta",
+                            MainImageURL = "https://fishingzone.bg/thumbs/1/2301271942421.jpg",
                             ManufacturerId = new Guid("f21230e5-9600-4113-bc2a-18c01affdf26"),
                             Model = "Stella FK 4000XG ",
                             Price = 1453.5
@@ -341,6 +346,7 @@ namespace SpinningWebApp.Migrations
                             AvailableAmount = 16,
                             CategoryId = new Guid("acbd3cde-f96e-4a60-955e-7290a41f155c"),
                             Description = "Giga ceps vudica",
+                            MainImageURL = "https://fishingzone.bg/thumbs/1/2312281539051.jpg",
                             ManufacturerId = new Guid("fe6692da-6330-4c1a-a5e2-512596cd54a1"),
                             Model = "Revenge SG6 Medium Game",
                             Price = 419.0
@@ -351,6 +357,7 @@ namespace SpinningWebApp.Migrations
                             AvailableAmount = 20,
                             CategoryId = new Guid("e4ea4f50-b25a-4bd9-9120-0df23d58a544"),
                             Description = "Brutaliika si e nqa da luja",
+                            MainImageURL = "https://fishingzone.bg/thumbs/1/2311101433471.jpg",
                             ManufacturerId = new Guid("48216279-e574-41c2-b631-f59ab5f07830"),
                             Model = "Jester Minnow 78S",
                             Price = 32.899999999999999
@@ -363,7 +370,7 @@ namespace SpinningWebApp.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("ImagePath")
+                    b.Property<string>("ImageURL")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
@@ -376,26 +383,6 @@ namespace SpinningWebApp.Migrations
                     b.HasIndex("ProductId");
 
                     b.ToTable("Images");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("5ae6caeb-fc08-4c9b-b7f5-d07d0288e7a2"),
-                            ImagePath = "~/images/savage-gear-revenge-sg6-medium-game.jpg",
-                            ProductId = new Guid("45b72494-1287-4eb6-b22b-4a672a9bd01c")
-                        },
-                        new
-                        {
-                            Id = new Guid("a88a85ee-0019-4b80-9026-12249e337303"),
-                            ImagePath = "~/images/jackson-jester-minnow-78s.jpg",
-                            ProductId = new Guid("3ab3f6d1-f45d-4c80-b9ac-f4cade704097")
-                        },
-                        new
-                        {
-                            Id = new Guid("ba00915b-4b65-45a1-a551-b58065a4ab6d"),
-                            ImagePath = "~/images/shimano-stella-fk-4000xg.jpg",
-                            ProductId = new Guid("5ad1ea09-52eb-4296-8321-b278b06e920c")
-                        });
                 });
 
             modelBuilder.Entity("SpinningWebApp.Data.Models.ProductSpecification", b =>

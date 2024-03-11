@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using SpinningWebApp.Models;
 using SpinningWebApp.Models.Account;
 
 namespace SpinningWebApp.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
         private readonly UserManager<User> userManager;
@@ -17,6 +19,7 @@ namespace SpinningWebApp.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Register()
         {
             var viewModel = new RegisterViewModel();
@@ -24,6 +27,7 @@ namespace SpinningWebApp.Controllers
             return View(viewModel);
         }
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Register(RegisterViewModel viewModel)
         {
             if (viewModel == null)
@@ -57,6 +61,7 @@ namespace SpinningWebApp.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public IActionResult Login()
         {
             var viewModel = new LoginViewModel();
@@ -64,6 +69,7 @@ namespace SpinningWebApp.Controllers
             return View(viewModel);
         }
         [HttpPost]
+        [AllowAnonymous]
         public async Task<IActionResult> Login(LoginViewModel viewModel)
         {
             if (!ModelState.IsValid)
@@ -86,7 +92,7 @@ namespace SpinningWebApp.Controllers
             ModelState.AddModelError("", "Невалидно вписване");
             return View(viewModel);
         }
-
+        
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
