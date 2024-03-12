@@ -45,6 +45,7 @@ namespace SpinningWebApp.Services
         public async Task<Category?> GetCategoryByName(string categoryName)
         {
             var category = await dbContext.Categories
+
                 .FirstOrDefaultAsync(c => c.Name == categoryName);
 
             if (category == null)
@@ -60,12 +61,38 @@ namespace SpinningWebApp.Services
             return category;
         }
 
+        public async Task<IEnumerable<Category>> GetCategoriesAndProductsAsync()
+        {
+            var categories = await dbContext.Categories.Include(ca => ca.Products).ToListAsync();
+
+            if (categories == null)
+            {
+                throw new ArgumentException("Въведената категория не бе намерена.");
+            }
+
+            if (categories != null)
+            {
+                for (int i = 0; i < categories.Count; i++)
+                {
+                    if (categories[i].Products != null)
+                    {
+                        categories[i].Products = (ICollection<Product>)await GetProductsByCategoryAsync(categories[i].Name);
+                    }
+                }
+            }
+
+            return categories;
+        }
+
         public async Task<IEnumerable<Product>> GetProductsByCategoryAsync(string categoryName)
         {
             var products = await dbContext.Products
                 .Include(p => p.Category)
                 .Include(p => p.Manufacturer)
+                .Include(p => p.ProductSpecifications)
+                .Include(p => p.ProductImages)
                 .Where(p => p.Category.Name == categoryName)
+                .OrderBy(p => p.Manufacturer.Name)
                 .ToListAsync();
 
             if (products == null)

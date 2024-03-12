@@ -35,7 +35,7 @@ namespace SpinningWebApp.Data.Models
 
         public ICollection<ProductImage> ProductImages { get; set; } = null!;
 
-        public ICollection<ProductSpecification> ProductAttributes { get; set; } = null!;
+        public ICollection<ProductSpecification> ProductSpecifications { get; set; } = null!;
 
         public ICollection<SessionProduct> SessionProducts { get; set; } = null!;
 
