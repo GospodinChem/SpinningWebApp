@@ -16,32 +16,34 @@ namespace SpinningWebApp.Controllers
         [HttpGet]
         public async Task<IActionResult> Index(string? categoryName = null, string? sortType = null)
         {
-            try
+            var categories = await shopService.GetCategoriesAsync();
+
+            if (categoryName == null)
             {
-                var categories = await shopService.GetCategoriesAsync();
-
-                if (categoryName == null)
-                {
-                    categoryName = "Въдици";
-                }
-
-                if (categories != null)
-                {
-                    ViewBag.Categories = categories;
-
-                    var category = await shopService.GetCategoryByName(categoryName);
-
-                    if (category != null)
-                    {
-                        return View("Index", category);
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                throw;
+                categoryName = "Въдици";
             }
 
+            if (categories != null)
+            {
+                ViewBag.Categories = categories;
+                CategoryViewModel category = new();
+
+                try
+                {
+                    category = await shopService.GetCategoryByNameAsync(categoryName);
+                    ViewBag.Products = await shopService.GetProductsByCategoryAsync(categoryName);
+                }
+                catch (Exception)
+                {
+                    return RedirectToAction("Index", "Home");
+                }
+
+                if (category != null)
+                {
+                    return View("Index", category);
+                }
+
+            }
             return RedirectToAction("Index", "Home");
         }
     }

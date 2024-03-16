@@ -1,10 +1,11 @@
-﻿@model List<SpinningWebApp.Data.Models.Category>
+﻿@model List<SpinningWebApp.Models.CategoryProductsViewModel>
 
 <!doctype html>
 <html lang="en">
 
 @{
     Layout = "Layouts/_AuthenticationPartial";
+    int count = 1;
 }
 
 <head>
@@ -13,6 +14,8 @@
     <title>Modernize Free</title>
     <link rel="shortcut icon" type="image/png" href="/adm_panel_assets/images/logos/favicon.png" />
     <link rel="stylesheet" href="/adm_panel_assets/css/styles.min.css" />
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" />
+
 </head>
 
 <body>
@@ -206,7 +209,7 @@
                             <div class="col-lg-8 d-flex align-items-stretch">
                                 <div class="card w-100">
                                     <div class="card-body p-4">
-                                        <h5 class="card-title fw-semibold mb-4">@item.Name</h5>
+                                        <h5 class="card-title fw-semibold mb-4">@item.CategoryName</h5>
                                         <div class="table-responsive">
                                             <table class="table text-nowrap mb-0 align-middle">
                                                 <thead class="text-dark fs-4">
@@ -231,27 +234,37 @@
                                                 <tbody>
                                                     @if (item.Products != null && item.Products.Any())
                                                     {
-                                                        for (int i = 0; i < item.Products.Count; i++)
+                                                        foreach (var product in item.Products)
                                                         {
                                                             <tr>
-                                                                <td class="border-bottom-0"><h6 class="fw-semibold mb-0"></h6></td>
+                                                                <td class="border-bottom-0"><h6 class="fw-semibold mb-0">@(count++)</h6></td>
                                                                 <td class="border-bottom-0">
-                                                                    <h6 class="fw-semibold mb-1">Sunil Joshi</h6>
-                                                                    <span class="fw-normal">Web Designer</span>
+                                                                    <h6 class="fw-semibold mb-1">@product.ManufacturerName</h6>
                                                                 </td>
                                                                 <td class="border-bottom-0">
-                                                                    <p class="mb-0 fw-normal">Elite Admin</p>
+                                                                    <h6 class="fw-semibold mb-1">@product.Model</h6>
                                                                 </td>
                                                                 <td class="border-bottom-0">
-                                                                    <div class="d-flex align-items-center gap-2">
-                                                                        <span class="badge bg-primary rounded-3 fw-semibold">Low</span>
-                                                                    </div>
+                                                                    <h6 class="fw-semibold mb-0 fs-4">@product.Price лв.</h6>
                                                                 </td>
                                                                 <td class="border-bottom-0">
-                                                                    <h6 class="fw-semibold mb-0 fs-4">$3.9</h6>
+                                                                    <h6 class="fw-semibold mb-1">@product.AvailableAmount</h6>
+                                                                </td>
+                                                                <td>
+                                                                    <a href=""><i class="fa fa-pencil-square-o" style="font-size: 24px;"></i></a>
+                                                                </td>
+                                                                <td>
+                                                                    <a href=""><i class="fa fa-trash-o" style="font-size: 24px; color:red"></i></a>
                                                                 </td>
                                                             </tr>
                                                         }
+                                                        <tr>
+                                                            <td colspan="7">
+                                                                <a asp-controller="Admin" asp-action="AddProduct" asp-route-categoryName="@item.CategoryName" class="btn btn-secondary">Добави продукт</a>
+                                                            </td>
+                                                        </tr>
+
+                                                        count = 1;
                                                     }
                                                     else
                                                     {

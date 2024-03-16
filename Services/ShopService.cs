@@ -42,10 +42,9 @@ namespace SpinningWebApp.Services
             return models;
         }
 
-        public async Task<Category?> GetCategoryByName(string categoryName)
+        public async Task<CategoryViewModel> GetCategoryByNameAsync(string categoryName)
         {
             var category = await dbContext.Categories
-
                 .FirstOrDefaultAsync(c => c.Name == categoryName);
 
             if (category == null)
@@ -53,43 +52,77 @@ namespace SpinningWebApp.Services
                 throw new ArgumentException("Въведената категория не бе намерена.");
             }
 
-            if (category != null)
+            var viewModel = new CategoryViewModel()
             {
-                category.Products = (ICollection<Product>)await GetProductsByCategoryAsync(categoryName);
-            }
+                Id = category.Id,
+                Name = categoryName,
+                ProductsCount = category.Products.Count
+            };
 
-            return category;
+            return viewModel;
         }
 
-        public async Task<IEnumerable<Category>> GetCategoriesAndProductsAsync()
+        public async Task<IEnumerable<CategoryProductsViewModel>> GetCategoryAndProductsAsync()
         {
-            var categories = await dbContext.Categories.Include(ca => ca.Products).ToListAsync();
+            var categories = await dbContext.Categories
+                 .Include(ca => ca.Products)
+                 .OrderBy(ca => ca.Name)
+                 .ToListAsync();
 
             if (categories == null)
             {
-                throw new ArgumentException("Въведената категория не бе намерена.");
+                throw new ArgumentNullException("Няма налични категории.");
             }
 
-            if (categories != null)
+            List<CategoryProductsViewModel> models = new List<CategoryProductsViewModel>();
+
+            foreach (var item in categories)
             {
-                for (int i = 0; i < categories.Count; i++)
+                List<ProductViewModel> productViewModels = new List<ProductViewModel>();
+
+                var products = await dbContext.Products
+                    .Include(p => p.Category)
+                    .Include(p => p.Manufacturer)
+                    .Where(p => p.Category.Name == item.Name)
+                    .ToListAsync();
+
+                foreach (var product in products)
                 {
-                    if (categories[i].Products != null)
+                    var productViewModel = new ProductViewModel()
                     {
-                        categories[i].Products = (ICollection<Product>)await GetProductsByCategoryAsync(categories[i].Name);
-                    }
+                        Id = product.Id,
+                        Model = product.Model,
+                        Price = product.Price,
+                        AvailableAmount = product.AvailableAmount,
+                        Description = product.Description,
+                        MainImageURL = product.MainImageURL,
+                        ManufacturerName = product.Manufacturer.Name,
+                        CategoryName = product.Category.Name
+                    };
+
+                    productViewModels.Add(productViewModel);
                 }
+
+                var categoryViewModel = new CategoryProductsViewModel()
+                {
+                    CategoryId = item.Id,
+                    CategoryName = item.Name,
+                    Products = productViewModels
+                };
+
+                models.Add(categoryViewModel);
             }
 
-            return categories;
+            return models;
         }
 
-        public async Task<IEnumerable<Product>> GetProductsByCategoryAsync(string categoryName)
+        public async Task<IEnumerable<ProductViewModel>> GetProductsByCategoryAsync(string categoryName)
         {
             var products = await dbContext.Products
                 .Include(p => p.Category)
                 .Include(p => p.Manufacturer)
                 .Include(p => p.ProductSpecifications)
+                .ThenInclude(ps => ps.Specification)
                 .Include(p => p.ProductImages)
                 .Where(p => p.Category.Name == categoryName)
                 .OrderBy(p => p.Manufacturer.Name)
@@ -100,7 +133,18 @@ namespace SpinningWebApp.Services
                 throw new ArgumentNullException("Няма продукти от дадената категория.");
             }
 
-            return products;
+            return products
+                .Select(p => new ProductViewModel()
+                {
+                    Id = p.Id,
+                    Model = p.Model,
+                    Price = p.Price,
+                    AvailableAmount = p.AvailableAmount,
+                    Description = p.Description,
+                    MainImageURL = p.MainImageURL,
+                    ManufacturerName = p.Manufacturer.Name,
+                    CategoryName = p.Category.Name
+                });
         }
     }
 }

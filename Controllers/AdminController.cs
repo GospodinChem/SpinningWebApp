@@ -12,10 +12,29 @@ namespace SpinningWebApp.Controllers
             this.shopService = shopService;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Dashboard()
         {
-            var categories = await shopService.GetCategoriesAndProductsAsync();
-            return View(categories);
+            try
+            {
+                var viewModels = await shopService.GetCategoryAndProductsAsync();
+
+                if (viewModels != null)
+                {
+                    return View(viewModels);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public IActionResult AddProduct(string categoryName)
+        {
+
         }
     }
 }

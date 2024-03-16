@@ -24,6 +24,9 @@ namespace SpinningWebApp.Models
         public string Description { get; set; } = null!;
 
         [Required]
+        public string MainImageURL { get; set; } = null!;
+
+        [Required]
         public string ManufacturerName { get; set; } = null!;
 
         [Required]

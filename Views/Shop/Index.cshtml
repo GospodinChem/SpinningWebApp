@@ -1,4 +1,4 @@
-﻿@model SpinningWebApp.Data.Models.Category
+﻿@model SpinningWebApp.Models.CategoryViewModel
 
 @{
     ViewData["Title"] = "";
@@ -123,7 +123,7 @@
                                 <li><a class="active" href="#gird" data-toggle="tab"><span></span><span></span><span></span><span></span></a></li>
                                 <li><a class="list" href="#list" data-toggle="tab"><span></span><span></span><span></span></a></li>
                             </ul>
-                            <p class="show-result">Показване на @Model.Products.Count резултата</p>
+                            <p class="show-result">Показване на @Model.ProductsCount резултата</p>
                         </div>
                         <div class="col-md-5">
                             <div class="sorting">
@@ -143,9 +143,9 @@
                         <!-- Grid View -->
                         <div class="tab-pane fade show in active" id="gird" role="tabpanel">
                             <div class="row">
-                                @if (Model != null && Model.Products.Any() && Model.Products != null)
+                                @if (Model != null && ViewBag.Products != null)
                                 {
-                                    foreach (var item in Model.Products)
+                                    foreach (var item in ViewBag.Products)
                                     {
                                         <div class="col-lg-4 col-md-6">
                                             <div class="product-item-1 text-center">
@@ -158,34 +158,34 @@
                                                     <a class="add-to-cart" href="cart.html"><i class="nss-shopping-cart1"></i>Добави</a>
                                                 </div>
                                                 <div class="product-details">
-                                                    @switch (item.Category.Name)
+                                                    @switch (item.CategoryName)
                                                     {
                                                         case "Аксесоари":
-                                                            <h5><a href="single-product.html">@item.Manufacturer.Name  @item.Model</a></h5>
+                                                            <h5><a href="single-product.html">@item.ManufacturerName @item.Model</a></h5>
                                                             break;
                                                         case "Блесни":
-                                                            <h5><a href="single-product.html">Блесна @item.Manufacturer.Name  @item.Model</a></h5>
+                                                            <h5><a href="single-product.html">Блесна @item.ManufacturerName  @item.Model</a></h5>
                                                             break;
                                                         case "Влакна":
-                                                            <h5><a href="single-product.html">Влакно @item.Manufacturer.Name  @item.Model</a></h5>
+                                                            <h5><a href="single-product.html">Влакно @item.ManufacturerName  @item.Model</a></h5>
                                                             break;
                                                         case "Воблери":
-                                                            <h5><a href="single-product.html">Воблер @item.Manufacturer.Name @item.Model</a></h5>
+                                                            <h5><a href="single-product.html">Воблер @item.ManufacturerName @item.Model</a></h5>
                                                             break;
                                                         case "Въдици":
-                                                            <h5><a href="single-product.html">Въдица @item.Manufacturer.Name @item.Model</a></h5>
+                                                            <h5><a href="single-product.html">Въдица @item.ManufacturerName @item.Model</a></h5>
                                                             break;
                                                         case "Джиг Глави":
-                                                            <h5><a href="single-product.html">Джиг глава @item.Manufacturer.Name @item.Model</a></h5>
+                                                            <h5><a href="single-product.html">Джиг глава @item.ManufacturerName @item.Model</a></h5>
                                                             break;
                                                         case "Куки":
-                                                            <h5><a href="single-product.html">Кука @item.Manufacturer.Name @item.Model</a></h5>
+                                                            <h5><a href="single-product.html">Кука @item.ManufacturerName @item.Model</a></h5>
                                                             break;
                                                         case "Макари":
-                                                            <h5><a href="single-product.html">Макара @item.Manufacturer.Name @item.Model</a></h5>
+                                                            <h5><a href="single-product.html">Макара @item.ManufacturerName @item.Model</a></h5>
                                                             break;
                                                         case "Силикони":
-                                                            <h5><a href="single-product.html">Силикон @item.Manufacturer.Name @item.Model</a></h5>
+                                                            <h5><a href="single-product.html">Силикон @item.ManufacturerName @item.Model</a></h5>
                                                             break;
                                                     }
                                                     <div class="ratings">
