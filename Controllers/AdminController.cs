@@ -43,10 +43,7 @@ namespace SpinningWebApp.Controllers
 
             try
             {
-                var viewModel = await adminService.PrepareAddProductViewModelAsync(categoryName);
-
-                viewModel.CategoryName = categoryName;
-
+                var viewModel = await adminService.PrepareCrudProductViewModelAsync(categoryName);
                 return View(viewModel);
             }
             catch (Exception)
@@ -55,7 +52,7 @@ namespace SpinningWebApp.Controllers
             }
         }
         [HttpPost]
-        public async Task<IActionResult> AddProduct(AddProductViewModel viewModel)
+        public async Task<IActionResult> AddProduct(CrudProductViewModel viewModel)
         {
             if (viewModel == null)
             {
@@ -72,6 +69,38 @@ namespace SpinningWebApp.Controllers
             catch (Exception)
             {
                 return RedirectToAction("AddProduct", "Admin");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> RedactProduct(Guid productId)
+        {
+            try
+            {
+                var viewModel = await adminService.PrepareModelForUpdateAsync(productId);
+                return View(viewModel);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Dashboard", "Admin");
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> RedactProduct(CrudProductViewModel viewModel)
+        {
+            if (viewModel == null)
+            {
+                return RedirectToAction("Dashboard", "Admin");
+            }
+
+            try
+            {
+                await adminService.UpdateProductAsync(viewModel);
+                return RedirectToAction("DashBoard", "Admin");
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("DashBoard", "Admin");
             }
         }
     }

@@ -204,7 +204,7 @@
                             <h5 class="card-title fw-semibold mb-4">@Model.CategoryName</h5>
                             <div class="card">
                                 <div class="card-body">
-                                    <form method="post" asp-action="AddProduct">
+                                    <form method="post" asp-action="RedactProduct">
                                         <div class="mb-3">
                                             <label for="mnfc" class="form-label">Производител(на английски)</label>
                                             <input type="text" class="form-control" id="mnfc" asp-for="ManufacturerName" />
@@ -231,14 +231,15 @@
                                         </div>
 
                                         <input type="hidden" asp-for="CategoryName" />
+                                        <input type="hidden" asp-for="Id" />
 
                                         @if (Model.SpecificationViewModels != null && Model.SpecificationViewModels.Any())
                                         {
-                                            if(Model.CategoryName != "Аксесоари")
+                                            if (Model.CategoryName != "Аксесоари")
                                             {
                                                 for (var i = 0; i < Model.SpecificationViewModels.Count; i++)
                                                 {
-                                                    <input type="hidden" asp-for="@Model.SpecificationViewModels[i].SpecificationName">
+                                                    <input type="hidden" asp-for="@Model.SpecificationViewModels[i].SpecificationName" />
                                                     <div class="mb-3">
                                                         <label for="" class="form-label">@Model.SpecificationViewModels[i].SpecificationName</label>
                                                         <input type="text" class="form-control" id="" asp-for="@Model.SpecificationViewModels[i].SpecificationValue">
@@ -247,7 +248,7 @@
                                             }
                                         }
 
-                                        <button type="submit" class="btn btn-primary">Създай</button>
+                                        <button type="submit" class="btn btn-primary">Редактирай</button>
                                     </form>
                                 </div>
                             </div>

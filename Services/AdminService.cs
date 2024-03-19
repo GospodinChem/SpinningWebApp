@@ -16,14 +16,14 @@ namespace SpinningWebApp.Services
             this.dbContext = _dbContext;
         }
 
-        public async Task<Guid> SaveProductAsync(AddProductViewModel viewModel)
+        public async Task<Guid> SaveProductAsync(CrudProductViewModel viewModel)
         {
             var manufacturer = await GetManufacturerAsync(viewModel.ManufacturerName);
             var category = await GetCategoryAsync(viewModel.CategoryName);
 
             if (manufacturer == null || category == null)
             {
-                throw new ArgumentNullException("Производителят / катергорията е/са невалидни.");
+                throw new ArgumentNullException("Производителят / катергорията не е/са невалидни.");
             }
 
             var product = new Product()
@@ -68,7 +68,7 @@ namespace SpinningWebApp.Services
             return manufacturer;
         }
 
-        public async Task<AddProductViewModel> PrepareAddProductViewModelAsync(string categoryName)
+        public async Task<CrudProductViewModel> PrepareCrudProductViewModelAsync(string categoryName)
         {
             if (categoryName.IsNullOrEmpty())
             {
@@ -78,7 +78,7 @@ namespace SpinningWebApp.Services
             var specifications = await dbContext.Specifications.ToListAsync()
             ?? throw new ArgumentNullException("Няма налични характеристики.");
 
-            AddProductViewModel viewModel = new AddProductViewModel();
+            CrudProductViewModel viewModel = new CrudProductViewModel();
             List<SpecificationViewModel> specificationsList = new List<SpecificationViewModel>();
 
             if (categoryName != "Аксесоари")
@@ -172,20 +172,93 @@ namespace SpinningWebApp.Services
             return viewModel;
         }
 
-        public async Task SaveProductSpecificationAsync(AddProductViewModel viewModel, Guid productId)
+        public async Task SaveProductSpecificationAsync(CrudProductViewModel viewModel, Guid productId)
         {
             foreach (var item in viewModel.SpecificationViewModels)
             {
                 var psMappingTable = new ProductSpecification()
                 {
                     ProductId = productId,
-                    SpecificationId = await dbContext.Specifications.Where(s => s.SpecName == item.SpecificationName).Select(s => s.Id).FirstOrDefaultAsync(),
+                    SpecificationId = await dbContext.Specifications
+                    .Where(s => s.SpecName == item.SpecificationName)
+                    .Select(s => s.Id).FirstOrDefaultAsync(),
                     SpecificationValue = item.SpecificationValue
                 };
 
                 await dbContext.ProductSpecifications.AddAsync(psMappingTable);
             }
 
+            await dbContext.SaveChangesAsync();
+        }
+
+        public async Task<CrudProductViewModel> PrepareModelForUpdateAsync(Guid productId)
+        {
+            var product = await dbContext.Products
+                .Include(p => p.Category)
+                .Include(p => p.Manufacturer)
+                .Include(p => p.ProductSpecifications)
+                .ThenInclude(ps => ps.Specification)
+                .FirstOrDefaultAsync(p => p.Id == productId);
+
+            var specs = product?.ProductSpecifications;
+
+            if (product == null || specs == null)
+            {
+                throw new ArgumentNullException("Нужните данни не бяха намерени.");
+            }
+
+            var viewModel = new CrudProductViewModel()
+            {
+                Id = productId,
+                ManufacturerName = product.Manufacturer.Name,
+                Model = product.Model,
+                Price = product.Price,
+                AvailableAmount = product.AvailableAmount,
+                Description = product.Description,
+                MainImageURL = product.MainImageURL,
+                CategoryName = product.Category.Name
+            };
+
+            List<SpecificationViewModel> specViewModels = new List<SpecificationViewModel>();
+
+            foreach (var item in specs)
+            {
+                var specsViewModel = new SpecificationViewModel()
+                {
+                    SpecificationName = item.Specification.SpecName,
+                    SpecificationValue = item.SpecificationValue
+                };
+
+                specViewModels.Add(specsViewModel);
+            }
+
+            viewModel.SpecificationViewModels = specViewModels;
+            return viewModel;
+        }
+
+        public async Task UpdateProductAsync(CrudProductViewModel viewModel)
+        {
+            var manufacturer = await GetManufacturerAsync(viewModel.ManufacturerName);
+            var category = await GetCategoryAsync(viewModel.CategoryName);
+
+            if (manufacturer == null || category == null)
+            {
+                throw new ArgumentNullException("Производителят / катергорията не е/са невалидни.");
+            }
+
+            var product = new Product()
+            {
+                Id = viewModel.Id,
+                Model = viewModel.Model,
+                Price = viewModel.Price,
+                AvailableAmount = viewModel.AvailableAmount,
+                Description = viewModel.Description,
+                MainImageURL = viewModel.MainImageURL,
+                ManufacturerId = manufacturer.Id,
+                CategoryId = category.Id,
+            };
+
+            dbContext.Products.Update(product);
             await dbContext.SaveChangesAsync();
         }
     }

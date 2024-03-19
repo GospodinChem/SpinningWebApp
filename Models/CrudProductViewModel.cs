@@ -2,8 +2,11 @@
 
 namespace SpinningWebApp.Models
 {
-    public class AddProductViewModel
+    public class CrudProductViewModel
     {
+        [Required]
+        public Guid Id { get; set; }
+
         [Required]
         public string Model { get; set; } = null!;
 
