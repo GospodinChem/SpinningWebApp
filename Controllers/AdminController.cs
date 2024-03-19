@@ -62,9 +62,11 @@ namespace SpinningWebApp.Controllers
             try
             {
                 var productId = await adminService.SaveProductAsync(viewModel);
-                await adminService.SaveProductSpecificationAsync(viewModel, productId);
-                return RedirectToAction("Dashboard", "Admin");
 
+                if(viewModel.CategoryName != "Аксесоари")
+                await adminService.SaveProductSpecificationAsync(viewModel, productId);
+
+                return RedirectToAction("Dashboard", "Admin");
             }
             catch (Exception)
             {
@@ -95,7 +97,7 @@ namespace SpinningWebApp.Controllers
 
             try
             {
-                await adminService.UpdateProductAsync(viewModel);
+                await adminService.UpdateProductAndSpecsAsync(viewModel);
                 return RedirectToAction("DashBoard", "Admin");
             }
             catch (Exception)

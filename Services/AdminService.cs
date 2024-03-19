@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.CodeAnalysis;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using SpinningWebApp.Contracts;
 using SpinningWebApp.Data;
@@ -75,14 +76,16 @@ namespace SpinningWebApp.Services
                 throw new ArgumentNullException("Нужната категория не бе въведена.");
             }
 
-            var specifications = await dbContext.Specifications.ToListAsync()
-            ?? throw new ArgumentNullException("Няма налични характеристики.");
-
             CrudProductViewModel viewModel = new CrudProductViewModel();
-            List<SpecificationViewModel> specificationsList = new List<SpecificationViewModel>();
+            viewModel.CategoryName = categoryName;
 
             if (categoryName != "Аксесоари")
             {
+                var specifications = await dbContext.Specifications.ToListAsync()
+                ?? throw new ArgumentNullException("Няма налични характеристики.");
+
+                List<SpecificationViewModel> specificationsList = new List<SpecificationViewModel>();
+
                 switch (categoryName)
                 {
                     case "Въдици":
@@ -166,7 +169,6 @@ namespace SpinningWebApp.Services
                 }).ToList();
 
                 viewModel.SpecificationViewModels = specificationsList;
-                viewModel.CategoryName = categoryName;
             }
 
             return viewModel;
@@ -200,9 +202,7 @@ namespace SpinningWebApp.Services
                 .ThenInclude(ps => ps.Specification)
                 .FirstOrDefaultAsync(p => p.Id == productId);
 
-            var specs = product?.ProductSpecifications;
-
-            if (product == null || specs == null)
+            if (product == null)
             {
                 throw new ArgumentNullException("Нужните данни не бяха намерени.");
             }
@@ -219,27 +219,32 @@ namespace SpinningWebApp.Services
                 CategoryName = product.Category.Name
             };
 
-            List<SpecificationViewModel> specViewModels = new List<SpecificationViewModel>();
-
-            foreach (var item in specs)
+            if (viewModel.CategoryName != "Аксесоари")
             {
-                var specsViewModel = new SpecificationViewModel()
+                var specs = product.ProductSpecifications;
+                List<SpecificationViewModel> specViewModels = new List<SpecificationViewModel>();
+
+                foreach (var item in specs)
                 {
-                    SpecificationName = item.Specification.SpecName,
-                    SpecificationValue = item.SpecificationValue
-                };
+                    var specsViewModel = new SpecificationViewModel()
+                    {
+                        SpecificationName = item.Specification.SpecName,
+                        SpecificationValue = item.SpecificationValue
+                    };
 
-                specViewModels.Add(specsViewModel);
+                    specViewModels.Add(specsViewModel);
+                }
+
+                viewModel.SpecificationViewModels = specViewModels;
             }
-
-            viewModel.SpecificationViewModels = specViewModels;
             return viewModel;
         }
 
-        public async Task UpdateProductAsync(CrudProductViewModel viewModel)
+        public async Task UpdateProductAndSpecsAsync(CrudProductViewModel viewModel)
         {
             var manufacturer = await GetManufacturerAsync(viewModel.ManufacturerName);
             var category = await GetCategoryAsync(viewModel.CategoryName);
+
 
             if (manufacturer == null || category == null)
             {
@@ -259,6 +264,23 @@ namespace SpinningWebApp.Services
             };
 
             dbContext.Products.Update(product);
+
+            if (viewModel.CategoryName != "Аксесоари")
+            {
+                foreach (var item in viewModel.SpecificationViewModels)
+                {
+                    var psMappingTable = new ProductSpecification()
+                    {
+                        ProductId = viewModel.Id,
+                        SpecificationId = await dbContext.Specifications
+                        .Where(s => s.SpecName == item.SpecificationName)
+                        .Select(s => s.Id).FirstOrDefaultAsync(),
+                        SpecificationValue = item.SpecificationValue
+                    };
+
+                    dbContext.ProductSpecifications.Update(psMappingTable);
+                }
+            }
             await dbContext.SaveChangesAsync();
         }
     }

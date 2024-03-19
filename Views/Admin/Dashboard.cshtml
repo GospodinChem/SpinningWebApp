@@ -272,6 +272,9 @@
                                                             <td class="border-bottom-0" colspan="5">
                                                                 <p class="mb-0 fw-normal">Продукти от тази категория не са в наличност.</p>
                                                             </td>
+                                                            <td colspan="7">
+                                                                <a asp-controller="Admin" asp-action="AddProduct" asp-route-categoryName="@item.CategoryName" class="btn btn-secondary">Добави продукт</a>
+                                                            </td>
                                                         </tr>
                                                     }
                                                 </tbody>
