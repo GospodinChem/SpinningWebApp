@@ -35,6 +35,7 @@ namespace SpinningWebApp
             });
 
             builder.Services.AddScoped<IShopService, ShopService>();
+            builder.Services.AddScoped<IAdminService, AdminService>();
 
             var app = builder.Build();
 

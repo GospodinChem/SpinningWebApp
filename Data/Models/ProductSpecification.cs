@@ -15,6 +15,5 @@ namespace SpinningWebApp.Data.Models
 
         [Required]
         public string SpecificationValue { get; set; } = null!;
-
     }
 }
