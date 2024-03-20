@@ -63,8 +63,8 @@ namespace SpinningWebApp.Controllers
             {
                 var productId = await adminService.SaveProductAsync(viewModel);
 
-                if(viewModel.CategoryName != "Аксесоари")
-                await adminService.SaveProductSpecificationAsync(viewModel, productId);
+                if (viewModel.CategoryName != "Аксесоари")
+                    await adminService.SaveProductSpecificationAsync(viewModel, productId);
 
                 return RedirectToAction("Dashboard", "Admin");
             }
@@ -103,6 +103,20 @@ namespace SpinningWebApp.Controllers
             catch (Exception)
             {
                 return RedirectToAction("DashBoard", "Admin");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteProduct(Guid productId)
+        {
+            try
+            {
+                await adminService.RemoveProduct(productId);
+                return RedirectToAction("Dashboard", "Admin");
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Dashboard", "Admin");
             }
         }
     }

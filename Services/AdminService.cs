@@ -283,5 +283,20 @@ namespace SpinningWebApp.Services
             }
             await dbContext.SaveChangesAsync();
         }
+
+        public async Task RemoveProduct(Guid productId)
+        {
+            var product = dbContext.Products.FirstOrDefault(p => p.Id == productId);
+
+            if (product != null)
+            {
+                dbContext.Products.Remove(product);
+                await dbContext.SaveChangesAsync();
+            }
+            else
+            {
+                throw new ArgumentNullException("Продуктът не бе намерен.");
+            }
+        }
     }
 }
