@@ -92,7 +92,8 @@ namespace SpinningWebApp.Controllers
             ModelState.AddModelError("", "Невалидно вписване");
             return View(viewModel);
         }
-        
+
+        [HttpPost]
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();
