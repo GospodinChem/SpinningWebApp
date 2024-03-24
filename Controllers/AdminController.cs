@@ -90,11 +90,6 @@ namespace SpinningWebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> RedactProduct(CrudProductViewModel viewModel)
         {
-            if (viewModel == null)
-            {
-                return RedirectToAction("Dashboard", "Admin");
-            }
-
             try
             {
                 await adminService.UpdateProductAndSpecsAsync(viewModel);
@@ -102,7 +97,7 @@ namespace SpinningWebApp.Controllers
             }
             catch (Exception)
             {
-                return RedirectToAction("DashBoard", "Admin");
+                return View(viewModel);
             }
         }
 
@@ -117,6 +112,30 @@ namespace SpinningWebApp.Controllers
             catch (Exception)
             {
                 return RedirectToAction("Dashboard", "Admin");
+            }
+        }
+
+        [HttpGet]
+        public IActionResult AddImage(Guid productId)
+        {
+            var viewModel = new AddImageViewModel()
+            {
+                ProductId = productId
+            };
+
+            return View(viewModel);
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddImage(AddImageViewModel viewModel)
+        {
+            try
+            {
+                await adminService.SaveProductImageAsync(viewModel);
+                return RedirectToAction("Dashboard", "Admin");
+            }
+            catch (Exception)
+            {
+                return View(viewModel);
             }
         }
     }

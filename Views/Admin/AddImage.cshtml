@@ -1,0 +1,37 @@
+﻿@model SpinningWebApp.Models.AddImageViewModel
+
+@{
+    Layout = "Layouts/_AdminPartial";
+}
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/png" href="/assets/images/logo.png" />
+    <link rel="stylesheet" href="/adm_panel_assets/css/styles.min.css" />
+    <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" />
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="container-fluid">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title fw-semibold mb-4">Добави допълнително изображение</h5>
+                    <div class="card">
+                        <div class="card-body">
+                            <form method="post" asp-action="AddImage">
+                                <div class="mb-3">
+                                    <label for="link" class="form-label">URL адрес(линк) на изображението</label>
+                                    <input type="text" class="form-control" id="link" asp-for="ImageURL" />
+                                </div>
+                                <input type="hidden" asp-for="ProductId" />
+                                <button type="submit" class="btn btn-primary">Добави</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

@@ -299,5 +299,23 @@ namespace SpinningWebApp.Services
                 throw new ArgumentNullException("Продуктът не бе намерен.");
             }
         }
+
+        public async Task SaveProductImageAsync(AddImageViewModel viewModel)
+        {
+            if (viewModel == null)
+            {
+                throw new ArgumentNullException("Данните не бяха изпратени.");
+            }
+
+            var image = new ProductImage()
+            {
+                Id = Guid.NewGuid(),
+                ImageURL = viewModel.ImageURL,
+                ProductId = viewModel.ProductId
+            };
+
+            await dbContext.Images.AddAsync(image);
+            await dbContext.SaveChangesAsync();
+        }
     }
 }

@@ -13,5 +13,6 @@ namespace SpinningWebApp.Contracts
         Task<CrudProductViewModel> PrepareModelWithSpecsNameValueAsync(Guid productId);
         Task UpdateProductAndSpecsAsync(CrudProductViewModel viewModel);
         Task RemoveProduct(Guid productId);
+        Task SaveProductImageAsync(AddImageViewModel viewModel);
     }
 }
