@@ -55,6 +55,8 @@ namespace SpinningWebApp.Controllers
             try
             {
                 var viewModel = await adminService.PrepareModelWithSpecsNameValueAsync(productId);
+                ViewBag.Images = await shopService.GetProductImagesAsync(productId);
+
                 return View(viewModel);
             }
             catch(Exception)

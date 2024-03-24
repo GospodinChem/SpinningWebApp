@@ -118,7 +118,7 @@ namespace SpinningWebApp.Controllers
         [HttpGet]
         public IActionResult AddImage(Guid productId)
         {
-            var viewModel = new AddImageViewModel()
+            var viewModel = new CrudImageViewModel()
             {
                 ProductId = productId
             };
@@ -126,7 +126,7 @@ namespace SpinningWebApp.Controllers
             return View(viewModel);
         }
         [HttpPost]
-        public async Task<IActionResult> AddImage(AddImageViewModel viewModel)
+        public async Task<IActionResult> AddImage(CrudImageViewModel viewModel)
         {
             try
             {

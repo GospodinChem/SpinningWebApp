@@ -146,5 +146,33 @@ namespace SpinningWebApp.Services
                     CategoryName = p.Category.Name
                 });
         }
+
+        public async Task<IEnumerable<CrudImageViewModel>> GetProductImagesAsync(Guid productId)
+        {
+            var images = await dbContext.Products
+                .Include(p => p.ProductImages)
+                .Where(p => p.Id == productId)
+                .Select(p => p.ProductImages)
+                .FirstOrDefaultAsync();
+
+            if (images == null)
+            {
+                throw new ArgumentNullException("Няма налични изображения.");
+            }
+
+            List<CrudImageViewModel> viewModels = new List<CrudImageViewModel>();
+
+            foreach (var image in images)
+            {
+                var viewModel = new CrudImageViewModel()
+                {
+                    ImageURL = image.ImageURL,
+                    ProductId = image.ProductId
+                };
+                viewModels.Add(viewModel);
+            }
+
+            return viewModels;
+        }
     }
 }

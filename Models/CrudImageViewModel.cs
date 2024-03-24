@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SpinningWebApp.Models
 {
-    public class AddImageViewModel
+    public class CrudImageViewModel
     {
         [Required]
         public string ImageURL { get; set; } = null!;

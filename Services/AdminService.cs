@@ -300,7 +300,7 @@ namespace SpinningWebApp.Services
             }
         }
 
-        public async Task SaveProductImageAsync(AddImageViewModel viewModel)
+        public async Task SaveProductImageAsync(CrudImageViewModel viewModel)
         {
             if (viewModel == null)
             {

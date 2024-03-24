@@ -1,7 +1,7 @@
 ﻿@model SpinningWebApp.Models.CrudProductViewModel
 
 @{
-    string count = ""; 
+    string count = "";
 }
 
 <!DOCTYPE html>
@@ -64,29 +64,25 @@
                         <div class="sp_img">
                             <img src="@Model.MainImageURL" width="570" style="margin-left:auto; margin-right:auto" alt="product">
                         </div>
-                        <div class="sp_img">
-                            <img src="assets/images/single-product/2.jpg" alt="product">
-                        </div>
-                        <div class="sp_img">
-                            <img src="assets/images/single-product/3.jpg" alt="product">
-                        </div>
-                        <div class="sp_img">
-                            <img src="assets/images/single-product/4.jpg" alt="product">
-                        </div>
-                        <div class="sp_img">
-                            <img src="assets/images/single-product/1.jpg" alt="product">
-                        </div>
-                        <div class="sp_img">
-                            <img src="assets/images/single-product/2.jpg" alt="product">
-                        </div>
+                        @if (ViewBag.Images != null)
+                        {
+                            foreach (var item in ViewBag.Images)
+                            {
+                                <div class="sp_img">
+                                    <img src="@item.ImageURL" width="570" style="margin-left:auto; margin-right:auto" alt="product">
+                                </div>
+                            }
+                        }
                     </div>
                     <ul class="indicator-slider">
                         <li role="presentation"><img src="@Model.MainImageURL" width="170" alt="product"></li>
-                        <li role="presentation"><img src="assets/images/single-product/s2.jpg" alt="product"></li>
-                        <li role="presentation"><img src="assets/images/single-product/s3.jpg" alt="product"></li>
-                        <li role="presentation"><img src="assets/images/single-product/s4.jpg" alt="product"></li>
-                        <li role="presentation"><img src="assets/images/single-product/s1.jpg" alt="product"></li>
-                        <li role="presentation"><img src="assets/images/single-product/s2.jpg" alt="product"></li>
+                        @if (ViewBag.Images != null)
+                        {
+                            foreach (var item in ViewBag.Images)
+                            {
+                                <li role="presentation"><img src="@item.ImageURL" width="170" alt="product"></li>
+                            }
+                        }
                     </ul>
                     <!-- Product Slider -->
                 </div>
