@@ -7,10 +7,12 @@ namespace SpinningWebApp.Controllers
     public class ShopController : Controller
     {
         private readonly IShopService shopService;
+        private readonly IAdminService adminService;
 
-        public ShopController(IShopService _shopService)
+        public ShopController(IShopService _shopService, IAdminService _adminService)
         {
             this.shopService = _shopService;
+            this.adminService = _adminService;
         }
 
         [HttpGet]
@@ -45,6 +47,26 @@ namespace SpinningWebApp.Controllers
 
             }
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> SingleProduct(Guid productId)
+        {
+            try
+            {
+                var viewModel = await adminService.PrepareModelWithSpecsNameValueAsync(productId);
+                return View(viewModel);
+            }
+            catch(Exception)
+            {
+                return RedirectToAction("Index", "Shop");
+            }
+        }
+
+        [HttpGet]
+        public IActionResult Cart(Guid productId, int productCount)
+        {
+            return View();
         }
     }
 }

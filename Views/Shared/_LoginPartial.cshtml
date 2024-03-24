@@ -3,7 +3,7 @@
 @inject SignInManager<User> SignInManager
 @inject UserManager<User> UserManager
 
-<ul class="navbar-nav">
+<ul class="navbar-nav align-items-center">
     @if (SignInManager.IsSignedIn(User))
     {
         <li class="nav-item">
@@ -11,8 +11,11 @@
                 <a href="javascript:void(0);" class="btn-search"><i class="nss-search1"></i></a>
                 <a href="account.html" class="btn-user"><i class="nss-user1"></i></a>
                 <a href="wishlist.html" class="btn-wishlist"><i class="nss-heart1"></i><span>1</span></a>
-                <a href="cart.html" class="btn-cart"><i class="nss-shopping-cart1"></i><span>1</span></a>
+                <a asp-controller="Shop" asp-action="Cart" class="btn-cart"><i class="nss-shopping-cart1"></i><span>1</span></a>
             </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Account" asp-action="Logout">Logout</a>
         </li>
     }
     else

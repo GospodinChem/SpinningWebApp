@@ -9,7 +9,7 @@
 
 <!-- Mirrored from psdtowpwork.com/html/fisto/shop-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 14 Feb 2024 08:57:39 GMT -->
 <head>
-    <title>Fisto - Fishing and Hunting Hobby Accessories store HTML5 Responsive Template</title>
+    <title>DLF - The best online fishing shop</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width">
 
@@ -47,7 +47,7 @@
                 <div class="col-lg-12">
                     <h3 class="pb_title">Категории</h3>
                     <div class="page_crumb">
-                        <a asp-controller="Home" asp-action="Index">Home</a> | <span>Продукти</span> | <span>@Model.Name</span>
+                        <a asp-controller="Home" asp-action="Index">Начало</a> | <a asp-controller="Shop" asp-action="Index">Продукти</a> | <a asp-controller="Shop" asp-action="Index" asp-route-categoryName="@Model.Name">@Model.Name</a>
                     </div>
                 </div>
             </div>
@@ -152,7 +152,7 @@
                                                 <div class="product-thumb">
                                                     <img src="@item.MainImageURL" alt="product">
                                                     <div class="product-meta">
-                                                        <a href="single-product.html" class="view"><i class="nss-eye1"></i></a>
+                                                        <a asp-controller="Shop" asp-action="SingleProduct" asp-route-productId="@item.Id" class="view"><i class="nss-eye1"></i></a>
                                                         <a href="wishlist.html" class="whishlist"><i class="nss-heart1"></i></a>
                                                     </div>
                                                     <a class="add-to-cart" href="cart.html"><i class="nss-shopping-cart1"></i>Добави</a>
@@ -299,6 +299,7 @@
                     </div>
                 </div>
             </div>
+        </div>
     </section>
     <!-- Shop End -->
     <!-- Back To Top -->

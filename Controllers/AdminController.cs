@@ -79,7 +79,7 @@ namespace SpinningWebApp.Controllers
         {
             try
             {
-                var viewModel = await adminService.PrepareModelForUpdateAsync(productId);
+                var viewModel = await adminService.PrepareModelWithSpecsNameValueAsync(productId);
                 return View(viewModel);
             }
             catch (Exception)

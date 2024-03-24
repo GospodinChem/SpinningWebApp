@@ -93,7 +93,7 @@ namespace SpinningWebApp.Controllers
             return View(viewModel);
         }
 
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> Logout()
         {
             await signInManager.SignOutAsync();

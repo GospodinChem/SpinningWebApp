@@ -10,7 +10,7 @@ namespace SpinningWebApp.Contracts
         Task<Category> GetCategoryAsync(string categoryName);
         Task<Guid> SaveProductAsync(CrudProductViewModel viewModel);
         Task SaveProductSpecificationAsync(CrudProductViewModel viewModel, Guid productId);
-        Task<CrudProductViewModel> PrepareModelForUpdateAsync(Guid productId);
+        Task<CrudProductViewModel> PrepareModelWithSpecsNameValueAsync(Guid productId);
         Task UpdateProductAndSpecsAsync(CrudProductViewModel viewModel);
         Task RemoveProduct(Guid productId);
     }

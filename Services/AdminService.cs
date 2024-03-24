@@ -96,7 +96,8 @@ namespace SpinningWebApp.Services
                             s.SpecName == "Транспортна дължина" ||
                             s.SpecName == "Тегло" ||
                             s.SpecName == "Работен диапазон" ||
-                            s.SpecName == "Вид риба").ToList();
+                            s.SpecName == "Вид риба"
+                            ).ToList();
                         break;
                     case "Макари":
                         specifications = specifications
@@ -193,7 +194,7 @@ namespace SpinningWebApp.Services
             await dbContext.SaveChangesAsync();
         }
 
-        public async Task<CrudProductViewModel> PrepareModelForUpdateAsync(Guid productId)
+        public async Task<CrudProductViewModel> PrepareModelWithSpecsNameValueAsync(Guid productId)
         {
             var product = await dbContext.Products
                 .Include(p => p.Category)
