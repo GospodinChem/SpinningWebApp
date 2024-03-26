@@ -10,5 +10,6 @@ namespace SpinningWebApp.Contracts
         Task<CategoryViewModel> GetCategoryByNameAsync(string categoryName);
         Task<IEnumerable<CategoryProductsViewModel>> GetCategoryAndProductsAsync();
         Task<IEnumerable<CrudImageViewModel>> GetProductImagesAsync(Guid productId);
+        Task<IEnumerable<>> Get
     }
 }

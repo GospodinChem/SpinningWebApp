@@ -69,7 +69,7 @@ namespace SpinningWebApp.Services
                  .OrderBy(ca => ca.Name)
                  .ToListAsync();
 
-            if (categories == null)
+            if (categories.Count == 0)
             {
                 throw new ArgumentNullException("Няма налични категории.");
             }
