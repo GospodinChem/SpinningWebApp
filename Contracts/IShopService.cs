@@ -8,8 +8,8 @@ namespace SpinningWebApp.Contracts
         Task<IEnumerable<CategoryViewModel>> GetCategoriesAsync();
         Task<IEnumerable<ProductViewModel>> GetProductsByCategoryAsync(string categoryName);
         Task<CategoryViewModel> GetCategoryByNameAsync(string categoryName);
-        Task<IEnumerable<CategoryProductsViewModel>> GetCategoryAndProductsAsync();
+        Task<IEnumerable<ProductViewModel>> GetProductsAsync(int? count = null);
         Task<IEnumerable<CrudImageViewModel>> GetProductImagesAsync(Guid productId);
-        Task<IEnumerable<>> Get
+        Task<IEnumerable<CategoryProductsViewModel>> GetCategoryAndProductsAsync();
     }
 }

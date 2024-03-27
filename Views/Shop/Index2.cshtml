@@ -1,0 +1,321 @@
+﻿@model List<SpinningWebApp.Models.ProductViewModel>
+
+@{
+    ViewData["Title"] = "";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from psdtowpwork.com/html/fisto/shop-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 14 Feb 2024 08:57:39 GMT -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+
+    <!-- Start Include All CSS -->
+    <link rel="stylesheet" href="/assets/css/bootstrap.css" />
+    <link rel="stylesheet" href="/assets/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/assets/css/elegant-icons.css" />
+    <link rel="stylesheet" href="/assets/css/fishto-icons.css" />
+    <link rel="stylesheet" href="/assets/css/animate.css" />
+    <link rel="stylesheet" href="/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/assets/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/assets/css/slick.css">
+    <link rel="stylesheet" href="/assets/css/lightcase.css">
+    <link rel="stylesheet" href="/assets/css/theme.css" />
+    <link rel="stylesheet" href="/assets/css/responsive.css" />
+    <!-- End Include All CSS -->
+    <!-- Favicon Icon -->
+    <link rel="icon" type="image/png" href="/assets/images/favicon.png">
+    <!-- Favicon Icon -->
+</head>
+<body>
+
+    <!-- Preloader Start -->
+    <div class="preloader">
+        <div class='circle'>
+            <div class="circle-cutter"></div>
+            <div class="circle-inner"></div>
+        </div>
+    </div>
+    <!-- Preloader Start -->
+    <!-- Hero Banner Start -->
+    <section class="page_banner" style="background-image: url(/assets/images/banner.jpg);">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="pb_title">Категории</h3>
+                    <div class="page_crumb">
+                        <a asp-controller="Home" asp-action="Index">Начало</a> | <a asp-controller="Shop" asp-action="Index2">Продукти</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Banner End -->
+    <!-- Shop Start -->
+    <section class="shoppage-setion">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="shop-sidebar">
+                        <aside class="widget widget-search">
+                            <form class="search-form" action="#" method="post">
+                                <input type="search" name="s" placeholder="Enter keyword">
+                                <button type="submit" value="Search"><i class="nss-search"></i></button>
+                            </form>
+                        </aside>
+                        <aside class="widget">
+                            <h3 class="widget-title">Категории</h3>
+                            <ul>
+                                @if (ViewBag.Categories != null)
+                                {
+                                    foreach (var item in ViewBag.Categories)
+                                    {
+                                        <li><a asp-controller="Shop" asp-action="Index" asp-route-categoryName="@item.Name">@item.Name</a> @item.ProductsCount</li>
+                                    }
+                                }
+                                else
+                                {
+                                    <li>Няма налични категории</li>
+                                }
+                            </ul>
+                        </aside>
+                        <aside class="widget">
+                            <h3 class="widget-title">Filter</h3>
+                            <div class="price_slider_wrapper">
+                                <form action="#" method="get" class="clearfix">
+                                    <div id="slider-range"></div>
+                                </form>
+                            </div>
+                        </aside>
+                        <aside class="widget">
+                            <h3 class="widget-title">Best Sellers</h3>
+                            <div class="best-sale-item">
+                                <img src="assets/images/product/b1.png" alt="product">
+                                <a href="single-product.html">Fishing Foldable</a>
+                                <div class="product_price clearfix"><span class="price"><span><span>$</span>35.00</span></span></div>
+                            </div>
+                            <div class="best-sale-item">
+                                <img src="assets/images/product/b2.png" alt="product">
+                                <a href="single-product.html">Net Fishing Nets</a>
+                                <div class="product_price clearfix"><span class="price"><span><span>$</span>15.00</span></span></div>
+                            </div>
+                            <div class="best-sale-item">
+                                <img src="assets/images/product/b3.png" alt="product">
+                                <a href="single-product.html">Telescoping Pole Handle</a>
+                                <div class="product_price clearfix"><span class="price"><span><span>$</span>32.00</span></span></div>
+                            </div>
+                        </aside>
+                        <aside class="widget">
+                            <h3 class="widget-title">Product tags</h3>
+                            <div class="tagcloud">
+                                <a href="#">Handle</a><a href="#">Fishing</a><a href="#">Reels</a><a href="#">Nets</a><a href="#">Safe</a>
+                            </div>
+                        </aside>
+                    </div>
+                </div>
+                <div class="col-lg-9 col-md-12">
+                    <div class="row">
+                        <div class="col-md-7">
+                            <ul class="toolbar-btn nav nav-tabs">
+                                <li><a class="active" href="#gird" data-toggle="tab"><span></span><span></span><span></span><span></span></a></li>
+                                <li><a class="list" href="#list" data-toggle="tab"><span></span><span></span><span></span></a></li>
+                            </ul>
+                            <p class="show-result">Показване на @Model.Count резултата</p>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="sorting">
+                                <select name="orderby" class="orderby">
+                                    <option value="sorting" selected="selected">Default sorting</option>
+                                    <option value="new">Newest Products</option>
+                                    <option value="popular">Popular Products</option>
+                                    <option value="rating">Average Rating</option>
+                                    <option value="price">Price: Low to High</option>
+                                    <option value="price-desc">Price: High to Low</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Tab Content -->
+                    <div class="tab-content">
+                        <!-- Grid View -->
+                        <div class="tab-pane fade show in active" id="gird" role="tabpanel">
+                            <div class="row">
+                                @if (Model.Count > 0)
+                                {
+                                    foreach (var item in Model)
+                                    {
+                                        <div class="col-lg-4 col-md-6">
+                                            <div class="product-item-1 text-center">
+                                                <div class="product-thumb">
+                                                    <img src="@item.MainImageURL" alt="product">
+                                                    <div class="product-meta">
+                                                        <a asp-controller="Shop" asp-action="SingleProduct" asp-route-productId="@item.Id" class="view"><i class="nss-eye1"></i></a>
+                                                        <a href="wishlist.html" class="whishlist"><i class="nss-heart1"></i></a>
+                                                    </div>
+                                                    <a class="add-to-cart" href="cart.html"><i class="nss-shopping-cart1"></i>Добави</a>
+                                                </div>
+                                                <div class="product-details">
+                                                    @switch (item.CategoryName)
+                                                    {
+                                                        case "Аксесоари":
+                                                            <h5><a href="single-product.html">@item.ManufacturerName @item.Model</a></h5>
+                                                            break;
+                                                        case "Блесни":
+                                                            <h5><a href="single-product.html">Блесна @item.ManufacturerName  @item.Model</a></h5>
+                                                            break;
+                                                        case "Влакна":
+                                                            <h5><a href="single-product.html">Влакно @item.ManufacturerName  @item.Model</a></h5>
+                                                            break;
+                                                        case "Воблери":
+                                                            <h5><a href="single-product.html">Воблер @item.ManufacturerName @item.Model</a></h5>
+                                                            break;
+                                                        case "Въдици":
+                                                            <h5><a href="single-product.html">Въдица @item.ManufacturerName @item.Model</a></h5>
+                                                            break;
+                                                        case "Джиг Глави":
+                                                            <h5><a href="single-product.html">Джиг глава @item.ManufacturerName @item.Model</a></h5>
+                                                            break;
+                                                        case "Куки":
+                                                            <h5><a href="single-product.html">Кука @item.ManufacturerName @item.Model</a></h5>
+                                                            break;
+                                                        case "Макари":
+                                                            <h5><a href="single-product.html">Макара @item.ManufacturerName @item.Model</a></h5>
+                                                            break;
+                                                        case "Силикони":
+                                                            <h5><a href="single-product.html">Силикон @item.ManufacturerName @item.Model</a></h5>
+                                                            break;
+                                                    }
+                                                    <div class="ratings">
+                                                    </div>
+                                                    <div class="product_price clearfix"><span class="price"><span><span>@item.Price</span> лв.</span></span></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+                                    <span style="text-align:center">Няма налични продукти от тази категория.</span>
+                                }
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 fishto-pagination text-center">
+                                    <a class="next" href="shop-2.html"><i class="nss-chevron-left1"></i></a>
+                                    <span class="current">1</span>
+                                    <a href="shop-2.html">2</a>
+                                    <a href="shop-2.html">3</a>
+                                    <a href="shop-2.html">...</a>
+                                    <a href="shop-2.html">10</a>
+                                    <a class="next" href="shop-2.html"><i class="nss-chevron-right1"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Grid View -->
+                        <!-- List View -->
+                        <div class="tab-pane fade in" id="list" role="tabpanel">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @if (Model.Count > 0)
+                                    {
+                                        foreach (var item in Model)
+                                        {
+                                            <div class="product-list-view">
+                                                <div class="row">
+                                                    <div class="col-lg-4 col-md-5">
+                                                        <div class="product-thumb">
+                                                            <img src="@item.MainImageURL" alt="product">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-8 col-md-7">
+                                                        <div class="product-details">
+                                                            @switch (item.CategoryName)
+                                                            {
+                                                                case "Аксесоари":
+                                                                    <h5><a href="single-product.html">@item.ManufacturerName @item.Model</a></h5>
+                                                                    break;
+                                                                case "Блесни":
+                                                                    <h5><a href="single-product.html">Блесна @item.ManufacturerName  @item.Model</a></h5>
+                                                                    break;
+                                                                case "Влакна":
+                                                                    <h5><a href="single-product.html">Влакно @item.ManufacturerName  @item.Model</a></h5>
+                                                                    break;
+                                                                case "Воблери":
+                                                                    <h5><a href="single-product.html">Воблер @item.ManufacturerName @item.Model</a></h5>
+                                                                    break;
+                                                                case "Въдици":
+                                                                    <h5><a href="single-product.html">Въдица @item.ManufacturerName @item.Model</a></h5>
+                                                                    break;
+                                                                case "Джиг Глави":
+                                                                    <h5><a href="single-product.html">Джиг глава @item.ManufacturerName @item.Model</a></h5>
+                                                                    break;
+                                                                case "Куки":
+                                                                    <h5><a href="single-product.html">Кука @item.ManufacturerName @item.Model</a></h5>
+                                                                    break;
+                                                                case "Макари":
+                                                                    <h5><a href="single-product.html">Макара @item.ManufacturerName @item.Model</a></h5>
+                                                                    break;
+                                                                case "Силикони":
+                                                                    <h5><a href="single-product.html">Силикон @item.ManufacturerName @item.Model</a></h5>
+                                                                    break;
+                                                            }
+                                                            <div class="ratings">
+                                                            </div>
+                                                            <div class="product_price clearfix"><span class="price"><span>@item.Price лв.</span></span></div>
+                                                            @* <p>
+                                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis at est id leo luctus gravida a in ipsum. Vivamus vel molestie nisipsum. Vivamus vel moles
+                                                    </p> *@
+                                                            <div class="listing-meta">
+                                                                <a class="add-to-cart" href="cart.html"><i class="nss-shopping-cart1"></i>Добави</a>
+                                                                <a asp-controller="Shop" asp-action="SingleProduct" asp-route-productId="@item.Id" class="view"><i class="nss-eye1"></i></a>
+                                                                <a href="wishlist.html" class="whishlist"><i class="nss-heart1"></i></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 fishto-pagination text-center">
+                                        <a class="next" href="shop-2.html"><i class="nss-chevron-left1"></i></a>
+                                        <span class="current">1</span>
+                                        <a href="shop-2.html">2</a>
+                                        <a href="shop-2.html">3</a>
+                                        <a href="shop-2.html">...</a>
+                                        <a href="shop-2.html">10</a>
+                                        <a class="next" href="shop-2.html"><i class="nss-chevron-right1"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- List View -->
+                        </div>
+                        <!-- Tab Content -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Shop End -->
+    <!-- Back To Top -->
+    <a href="#" id="back-to-top">
+        <i class="arrow_carrot-2up"></i>
+    </a>
+    <!-- Back To Top -->
+    <!-- Start Include All JS -->
+    <script src="/assets/js/jquery.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="/assets/js/jquery.appear.js"></script>
+    <script src="/assets/js/owl.carousel.min.js"></script>
+    <script src="/assets/js/slick.js"></script>
+    <script src="/assets/js/lightcase.js"></script>
+    <script src="/assets/js/jquery-ui.js"></script>
+    <script src="/assets/js/theme.js"></script>
+    <!-- End Include All JS -->
+
+</body>
+
+<!-- Mirrored from psdtowpwork.com/html/fisto/shop-2.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 14 Feb 2024 08:57:40 GMT -->
+</html>

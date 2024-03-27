@@ -16,7 +16,7 @@ namespace SpinningWebApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index(string? categoryName = null, string? sortType = null)
+        public async Task<IActionResult> Index(string? categoryName = null)
         {
             var categories = await shopService.GetCategoriesAsync();
 
@@ -50,23 +50,40 @@ namespace SpinningWebApp.Controllers
         }
 
         [HttpGet]
+        public async Task<IActionResult> Index2()
+        {
+            try
+            {
+                ViewBag.Categories = await shopService.GetCategoriesAsync();
+                var products = await shopService.GetProductsAsync(0);
+
+                return View(products);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+        [HttpGet]
         public async Task<IActionResult> SingleProduct(Guid productId)
         {
             try
             {
                 var viewModel = await adminService.PrepareModelWithSpecsNameValueAsync(productId);
                 ViewBag.Images = await shopService.GetProductImagesAsync(productId);
+                ViewBag.Suggested = await shopService.GetProductsAsync(4);
 
                 return View(viewModel);
             }
-            catch(Exception)
+            catch (Exception)
             {
                 return RedirectToAction("Index", "Shop");
             }
         }
 
         [HttpGet]
-        public IActionResult Cart(Guid productId, int productCount)
+        public IActionResult Cart(Guid productId, int? productCount)
         {
             return View();
         }

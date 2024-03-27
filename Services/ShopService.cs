@@ -3,6 +3,7 @@ using SpinningWebApp.Contracts;
 using SpinningWebApp.Data;
 using SpinningWebApp.Data.Models;
 using SpinningWebApp.Models;
+using System.Linq;
 
 namespace SpinningWebApp.Services
 {
@@ -69,7 +70,7 @@ namespace SpinningWebApp.Services
                  .OrderBy(ca => ca.Name)
                  .ToListAsync();
 
-            if (categories.Count == 0)
+            if (categories == null)
             {
                 throw new ArgumentNullException("Няма налични категории.");
             }
@@ -173,6 +174,52 @@ namespace SpinningWebApp.Services
             }
 
             return viewModels;
+        }
+        public async Task<IEnumerable<ProductViewModel>> GetProductsAsync(int? count = null)
+        {
+            var products = new List<Product>();
+
+            if (count > 0)
+            {
+                products = await dbContext.Products
+                   .Include(p => p.Category)
+                   .Include(p => p.Manufacturer)
+                   .Take((int)count)
+                   .ToListAsync();
+            }
+            else if (count == 0)
+            {
+                products = await dbContext.Products
+                   .Include(p => p.Category)
+                   .Include(p => p.Manufacturer)
+                   .ToListAsync();
+            }
+
+            if (products.Count == 0)
+            {
+                throw new ArgumentException("Няма налични продукти.");
+            }
+
+            List<ProductViewModel> models = [];
+
+            foreach (var product in products)
+            {
+                var productViewModel = new ProductViewModel()
+                {
+                    Id = product.Id,
+                    Model = product.Model,
+                    Price = product.Price,
+                    AvailableAmount = product.AvailableAmount,
+                    Description = product.Description,
+                    MainImageURL = product.MainImageURL,
+                    ManufacturerName = product.Manufacturer.Name,
+                    CategoryName = product.Category.Name
+                };
+
+                models.Add(productViewModel);
+            }
+
+            return models;
         }
     }
 }
