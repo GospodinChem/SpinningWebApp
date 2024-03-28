@@ -1,4 +1,4 @@
-﻿@model SpinningWebApp.Models.CategoryViewModel
+﻿@model List<SpinningWebApp.Models.ProductViewModel>
 
 @{
     ViewData["Title"] = "";
@@ -13,20 +13,20 @@
     <meta name="viewport" content="width=device-width">
 
     <!-- Start Include All CSS -->
-    <link rel="stylesheet" href="~/assets/css/bootstrap.css" />
-    <link rel="stylesheet" href="~/assets/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="~/assets/css/elegant-icons.css" />
-    <link rel="stylesheet" href="~/assets/css/fishto-icons.css" />
-    <link rel="stylesheet" href="~/assets/css/animate.css" />
-    <link rel="stylesheet" href="~/assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="~/assets/css/owl.theme.default.min.css">
-    <link rel="stylesheet" href="~/assets/css/slick.css">
-    <link rel="stylesheet" href="~/assets/css/lightcase.css">
-    <link rel="stylesheet" href="~/assets/css/theme.css" />
-    <link rel="stylesheet" href="~/assets/css/responsive.css" />
+    <link rel="stylesheet" href="/assets/css/bootstrap.css" />
+    <link rel="stylesheet" href="/assets/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="/assets/css/elegant-icons.css" />
+    <link rel="stylesheet" href="/assets/css/fishto-icons.css" />
+    <link rel="stylesheet" href="/assets/css/animate.css" />
+    <link rel="stylesheet" href="/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/assets/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/assets/css/slick.css">
+    <link rel="stylesheet" href="/assets/css/lightcase.css">
+    <link rel="stylesheet" href="/assets/css/theme.css" />
+    <link rel="stylesheet" href="/assets/css/responsive.css" />
     <!-- End Include All CSS -->
     <!-- Favicon Icon -->
-    <link rel="icon" type="image/png" href="~/assets/images/favicon.png">
+    <link rel="icon" type="image/png" href="/assets/images/favicon.png">
     <!-- Favicon Icon -->
 </head>
 <body>
@@ -40,13 +40,13 @@
     </div>
     <!-- Preloader Start -->
     <!-- Hero Banner Start -->
-    <section class="page_banner" style="background-image: url(assets/images/banner.jpg);">
+    <section class="page_banner" style="background-image: url(/assets/images/banner.jpg);">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <h3 class="pb_title">Категории</h3>
                     <div class="page_crumb">
-                        <a asp-controller="Home" asp-action="Index">Начало</a> | <a asp-controller="Shop" asp-action="Index">Продукти</a> | <a asp-controller="Shop" asp-action="Index" asp-route-categoryName="@Model.Name">@Model.Name</a>
+                        <a asp-controller="Home" asp-action="Index">Начало</a> | <a asp-controller="Shop" asp-action="Index2">Продукти</a>
                     </div>
                 </div>
             </div>
@@ -122,18 +122,21 @@
                                 <li><a class="active" href="#gird" data-toggle="tab"><span></span><span></span><span></span><span></span></a></li>
                                 <li><a class="list" href="#list" data-toggle="tab"><span></span><span></span><span></span></a></li>
                             </ul>
-                            <p class="show-result">Показване на @Model.ProductsCount резултата</p>
+                            <p class="show-result">Показване на @Model.Count резултата</p>
                         </div>
                         <div class="col-md-5">
                             <div class="sorting">
-                                <select name="orderby" class="orderby">
-                                    <option value="sorting" selected="selected">Default sorting</option>
-                                    <option value="new">Newest Products</option>
-                                    <option value="popular">Popular Products</option>
-                                    <option value="rating">Average Rating</option>
-                                    <option value="price">Price: Low to High</option>
-                                    <option value="price-desc">Price: High to Low</option>
-                                </select>
+                                <form method="post" enctype="multipart/form-data">
+                                    <select name="orderby" class="orderby" @* onchange="form.submit()" *@>
+                                        <a asp-controller="Shop" asp-action="Index2" asp-route-id="0">
+                                        <option value="sorting" selected="selected">Default sorting</option></a>
+                                        <a asp-controller="Shop" asp-action="FilterLowToHigh" asp-route-id="0">
+                                        <option value="price">Price: Low to High</option></a>
+                                        <option value="price-desc"><a asp-controller="Shop" asp-action="FilterHighToLow" asp-route-id="1">Price: High to Low</a></option>
+                                    </select>
+
+                                    <button class="btn-success" type="submit">Submit</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -142,9 +145,9 @@
                         <!-- Grid View -->
                         <div class="tab-pane fade show in active" id="gird" role="tabpanel">
                             <div class="row">
-                                @if (Model != null && ViewBag.Products != null || ViewBag.Product.Any())
+                                @if (Model.Count > 0)
                                 {
-                                    foreach (var item in ViewBag.Products)
+                                    foreach (var item in Model)
                                     {
                                         <div class="col-lg-4 col-md-6">
                                             <div class="product-item-1 text-center">
@@ -188,7 +191,6 @@
                                                             break;
                                                     }
                                                     <div class="ratings">
-                                                        <i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><span>( 1 )</span>
                                                     </div>
                                                     <div class="product_price clearfix"><span class="price"><span><span>@item.Price</span> лв.</span></span></div>
                                                 </div>
@@ -201,15 +203,21 @@
                                     <span style="text-align:center">Няма налични продукти от тази категория.</span>
                                 }
                             </div>
+
                             <div class="row">
                                 <div class="col-lg-12 fishto-pagination text-center">
-                                    <a class="next" href="shop-2.html"><i class="nss-chevron-left1"></i></a>
-                                    <span class="current">1</span>
-                                    <a href="shop-2.html">2</a>
-                                    <a href="shop-2.html">3</a>
-                                    <a href="shop-2.html">...</a>
-                                    <a href="shop-2.html">10</a>
-                                    <a class="next" href="shop-2.html"><i class="nss-chevron-right1"></i></a>
+                                    @for (int i = 1; i <= (int)TempData["pages"]; i++)
+                                    {
+                                        if ($"{i}" == TempData["curr"].ToString())
+                                        {
+                                            <a class="current" href="#" tabindex="-1">@i</a>
+                                        }
+                                        else
+                                        {
+                                            <a asp-controller="Shop" asp-action="Index2" asp-route-id="@i">@i</a>
+
+                                        }
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -218,9 +226,9 @@
                         <div class="tab-pane fade in" id="list" role="tabpanel">
                             <div class="row">
                                 <div class="col-md-12">
-                                    @if (Model != null && ViewBag.Products != null)
+                                    @if (Model.Count > 0)
                                     {
-                                        foreach (var item in ViewBag.Products)
+                                        foreach (var item in Model)
                                         {
                                             <div class="product-list-view">
                                                 <div class="row">
@@ -262,7 +270,6 @@
                                                                     break;
                                                             }
                                                             <div class="ratings">
-                                                                <i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><i class="icon_star_alt"></i><span>( 1 )</span>
                                                             </div>
                                                             <div class="product_price clearfix"><span class="price"><span>@item.Price лв.</span></span></div>
                                                             @* <p>
@@ -282,15 +289,20 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12 fishto-pagination text-center">
-                                        <a class="next" href="shop-2.html"><i class="nss-chevron-left1"></i></a>
-                                        <span class="current">1</span>
-                                        <a href="shop-2.html">2</a>
-                                        <a href="shop-2.html">3</a>
-                                        <a class="next" href="shop-2.html"><i class="nss-chevron-right1"></i></a>
+                                        @for (int i = 1; i <= (int)TempData["pages"]; i++)
+                                        {
+                                            if ($"{i}" == TempData["curr"].ToString())
+                                            {
+                                                <a class="current" href="#" tabindex="-1">@i</a>
+                                            }
+                                            else
+                                            {
+                                                <a asp-controller="Shop" asp-action="Index2" asp-route-id="@i">@i</a>
+
+                                            }
+                                        }
                                     </div>
                                 </div>
-
-                               
                             </div>
                             <!-- List View -->
                         </div>

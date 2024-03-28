@@ -24,37 +24,6 @@
     <!-- Favicon Icon -->
 </head>
 <body>
-    <!-- Topbar Start -->
-    <section class="topbar tp-three">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-7">
-                    <div class="topinfo">
-                        <p>FREE express international delivery + EASY returns</p>
-                    </div>
-                </div>
-                <div class="col-md-5">
-                    <div class="language">
-                        <a class="select" href="javascript:void(0)">Language<i class="arrow_carrot-down"></i></a>
-                        <div class="currency-lang">
-                            <ul>
-                                <li><a href="#">English</a></li>
-                                <li><a href="#">French</a></li>
-                                <li><a href="#">Arabic</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <ul class="topsocial">
-                        <li><a target="_blank" href="https://www.facebook.com/"><i class="nss-facebook-f"></i></a></li>
-                        <li><a target="_blank" href="https://twitter.com/"><i class="nss-twitter"></i></a></li>
-                        <li><a target="_blank" href="https://www.google.com/"><i class="nss-google-plus-g"></i></a></li>
-                        <li><a target="_blank" href="https://www.instagram.com/"><i class="nss-instagram"></i></a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Topbar End -->
     <!-- Header Start -->
     <header class="header-01 h3 head-sticky">
         <div class="container">
@@ -72,48 +41,24 @@
                         </button>
                         <!-- Moblie Btn End -->
                         <!-- Nav Menu Start -->
-                        <div class="collapse navbar-collapse justify-content-center">
-                            <ul class="navbar-nav">
+                        <div class="collapse navbar-collapse justify-content-start">
+                            <ul class="navbar-nav ml-5">
                                 <li class="menu-item-has-children">
-                                    <a href="javascript:void(0);">Home</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="index-2.html">Home One</a></li>
-                                        <li><a href="index-3.html">Home Two</a></li>
-                                        <li><a href="index-4.html">Home Three</a></li>
-                                    </ul>
+                                    <a href="javascript:void(0);">Начало</a>
                                 </li>
                                 <li class="menu-item-has-children">
-                                    <a href="javascript:void(0);">Shop</a>
+                                    <a href="javascript:void(0);">Категории</a>
                                     <ul class="sub-menu">
-                                        <li><a href="shop-1.html">Product Full Width</a></li>
-                                        <li><a asp-controller="Shop" asp-action="Shop">Product Left Sidebar</a></li>
-                                        <li><a href="shop-3.html">Product Right Sidebar</a></li>
-                                        <li><a href="single-product.html">Single Product</a></li>
-                                        <li><a href="cart.html">Cart Page</a></li>
-                                        <li><a href="checkout.html">Checkout Page</a></li>
-                                        <li><a href="wishlist.html">Wishlist Page</a></li>
+                                        <li><a asp-controller="Shop" asp-action="Index" asp-route-categoryName="Аксесоари">Аксесоари</a></li>
+                                        <li><a asp-controller="Shop" asp-action="Index" asp-route-categoryName="Блесни">Блесни</a></li>
+                                        <li><a asp-controller="Shop" asp-action="Index" asp-route-categoryName="Влакна">Влакна</a></li>
+                                        <li><a asp-controller="Shop" asp-action="Index" asp-route-categoryName="Воблери">Воблери</a></li>
+                                        <li><a asp-controller="Shop" asp-action="Index" asp-route-categoryName="Въдици">Въдици</a></li>
+                                        <li><a asp-controller="Shop" asp-action="Index" asp-route-categoryName="Джиг Глави">Джиг Глави</a></li>
+                                        <li><a asp-controller="Shop" asp-action="Index" asp-route-categoryName="Куки">Куки</a></li>
+                                        <li><a asp-controller="Shop" asp-action="Index" asp-route-categoryName="Макари">Макари</a></li>
+                                        <li><a asp-controller="Shop" asp-action="Index" asp-route-categoryName="Силикони">Силикони</a></li>
                                     </ul>
-                                </li>
-                                <li>
-                                    <a href="about.html">About</a>
-                                </li>
-                                <li class="menu-item-has-children">
-                                    <a href="javascript:void(0);">Pages</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="faq.html">Faq Page</a></li>
-                                        <li><a href="404.html">404 Page</a></li>
-                                    </ul>
-                                </li>
-                                <li class="menu-item-has-children">
-                                    <a href="javascript:void(0);">Blog</a>
-                                    <ul class="sub-menu">
-                                        <li><a href="blog.html">Blog List</a></li>
-                                        <li><a href="blog-2.html">Blog Grid</a></li>
-                                        <li><a href="single-blog.html">Blog Details</a></li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="contact.html">Contact</a>
                                 </li>
                             </ul>
                         </div>
@@ -184,7 +129,7 @@
                             <li><a href="index-4.html">News</a></li>
                         </ul>
                     </aside>
-                </div> 
+                </div>
                 <div class="col-lg-3 col-md-6">
                     <aside class="widget">
                         <h3 class="widget-title">Why Buy From Us</h3>

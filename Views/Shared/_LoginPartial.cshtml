@@ -14,17 +14,23 @@
                 <a asp-controller="Shop" asp-action="Cart" class="btn-cart"><i class="nss-shopping-cart1"></i><span>1</span></a>
             </div>
         </li>
+        <li class="nav-item ml-5">
+            <span>|</span>
+        </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-controller="Account" asp-action="Logout">Logout</a>
+            <a class="nav-link text-dark" asp-controller="Account" asp-action="Logout">Излез</a>
         </li>
     }
     else
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Login</a>
+            <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Влез</a>
         </li>
         <li class="nav-item ml-1">
-            <a class="nav-link text-dark" asp-controller="Account" asp-action="Register">Register</a>
+            <span>|</span>
+        </li>
+        <li class="nav-item ml-1">
+            <a class="nav-link text-dark" asp-controller="Account" asp-action="Register">Регистрирай се</a>
         </li>
     }
 </ul>

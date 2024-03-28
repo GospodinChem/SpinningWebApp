@@ -101,11 +101,11 @@
                         </div>
                         <div class="quantityd clearfix">
                             <button class="qtyBtn btnMinus"><span>-</span></button>
-                            <input name="qty" value="1" title="Qty" class="input-text qty text carqty" type="text" asp-for="@count">
+                            <input name="qty" value="1" title="Qty" class="input-text qty text carqty" type="text" asp-for="ShoppingCount">
                             <button class="qtyBtn btnPlus">+</button>
                         </div>
                         <div class="listing-meta">
-                            <a asp-controller="Shop" asp-action="Cart" asp-route-productId="@Model.Id" class="add-to-cart"><i class="nss-shopping-cart1"></i>Add To Cart</a>
+                            <a asp-controller="Shop" asp-action="Cart" asp-route-productId="@Model.Id " class="add-to-cart"><i class="nss-shopping-cart1"></i>Add To Cart</a>
                             <a href="wishlist.html" class="whishlist"><i class="nss-heart1"></i></a>
                         </div>
                         <div class="metatext"><span>Категория:</span> <a asp-controller="Shop" asp-action="Index" asp-route-categoryName="@Model.CategoryName">@Model.CategoryName</a></div>

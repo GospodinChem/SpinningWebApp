@@ -50,19 +50,60 @@ namespace SpinningWebApp.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index2()
+        public async Task<IActionResult> Index2(int id)
         {
             try
             {
                 ViewBag.Categories = await shopService.GetCategoriesAsync();
-                var products = await shopService.GetProductsAsync(0);
 
-                return View(products);
+                var model = await shopService.GetProductsAsync(id, 0);
+                var count = await shopService.GetAllProductsCount();
+
+                TempData["pages"] = count % 9 == 0 ? count / 9 : (count / 9) + 1; ;
+                TempData["curr"] = id == 0 ? 1 : id;
+
+                return View(model);
             }
             catch (Exception)
             {
                 return RedirectToAction("Index", "Home");
             }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> FilterHighToLow(int id)
+        {
+            try
+            {
+                ViewBag.Categories = await shopService.GetCategoriesAsync();
+
+                var model = await shopService.GetProductsFilteredHighToLowAsync(id, 0);
+                var count = await shopService.GetAllProductsCount();
+
+                TempData["pages"] = count % 9 == 0 ? count / 9 : (count / 9) + 1; ;
+                TempData["curr"] = id == 0 ? 1 : id;
+
+                return View("Index2", model);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> FilterLowToHigh(int id)
+        {
+            
+                ViewBag.Categories = await shopService.GetCategoriesAsync();
+
+                var model = await shopService.GetProductsFilteredLowToHighAsync(id, 0);
+                var count = await shopService.GetAllProductsCount();
+
+                TempData["pages"] = count % 9 == 0 ? count / 9 : (count / 9) + 1; ;
+                TempData["curr"] = id == 0 ? 1 : id;
+
+                return View("Index2", model);
         }
 
         [HttpGet]
@@ -72,7 +113,7 @@ namespace SpinningWebApp.Controllers
             {
                 var viewModel = await adminService.PrepareModelWithSpecsNameValueAsync(productId);
                 ViewBag.Images = await shopService.GetProductImagesAsync(productId);
-                ViewBag.Suggested = await shopService.GetProductsAsync(4);
+                ViewBag.Suggested = await shopService.GetProductsAsync(0, 4);
 
                 return View(viewModel);
             }
@@ -85,7 +126,7 @@ namespace SpinningWebApp.Controllers
         [HttpGet]
         public IActionResult Cart(Guid productId, int? productCount)
         {
-            return View();
+            return View();  
         }
     }
 }

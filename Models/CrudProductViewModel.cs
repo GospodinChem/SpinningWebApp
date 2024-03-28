@@ -14,6 +14,9 @@ namespace SpinningWebApp.Models
         public double Price { get; set; }
 
         [Required]
+        public int ShoppingCount { get; set; } 
+
+        [Required]
         public int AvailableAmount { get; set; }
 
         [Required]

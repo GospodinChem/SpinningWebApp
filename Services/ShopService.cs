@@ -175,7 +175,7 @@ namespace SpinningWebApp.Services
 
             return viewModels;
         }
-        public async Task<IEnumerable<ProductViewModel>> GetProductsAsync(int? count = null)
+        public async Task<IEnumerable<ProductViewModel>> GetProductsAsync(int page, int? count = null)
         {
             var products = new List<Product>();
 
@@ -192,8 +192,97 @@ namespace SpinningWebApp.Services
                 products = await dbContext.Products
                    .Include(p => p.Category)
                    .Include(p => p.Manufacturer)
+                   .OrderByDescending(p => p.Id)
+                   .Skip(12 * ((int)(page == 0 ? 1 : page) - 1))
+                   .Take(12)
                    .ToListAsync();
             }
+
+            if (products.Count == 0)
+            {
+                throw new ArgumentException("Няма налични продукти.");
+            }
+
+            List<ProductViewModel> models = [];
+
+            foreach (var product in products)
+            {
+                var productViewModel = new ProductViewModel()
+                {
+                    Id = product.Id,
+                    Model = product.Model,
+                    Price = product.Price,
+                    AvailableAmount = product.AvailableAmount,
+                    Description = product.Description,
+                    MainImageURL = product.MainImageURL,
+                    ManufacturerName = product.Manufacturer.Name,
+                    CategoryName = product.Category.Name
+                };
+
+                models.Add(productViewModel);
+            }
+
+            return models;
+        }
+
+        public async Task<int> GetAllProductsCount()
+        {
+            var count = await dbContext.Products.CountAsync();
+            return count;
+        }
+
+        public async Task<IEnumerable<ProductViewModel>> GetProductsFilteredHighToLowAsync(int page, int? count = null)
+        {
+            var products = new List<Product>();
+
+            products = await dbContext.Products
+               .Include(p => p.Category)
+               .Include(p => p.Manufacturer)
+               .OrderByDescending(p => p.Price)
+               .Skip(12 * ((int)(page == 0 ? 1 : page) - 1))
+               .Take(12)
+               .ToListAsync();
+
+
+            if (products.Count == 0)
+            {
+                throw new ArgumentException("Няма налични продукти.");
+            }
+
+            List<ProductViewModel> models = [];
+
+            foreach (var product in products)
+            {
+                var productViewModel = new ProductViewModel()
+                {
+                    Id = product.Id,
+                    Model = product.Model,
+                    Price = product.Price,
+                    AvailableAmount = product.AvailableAmount,
+                    Description = product.Description,
+                    MainImageURL = product.MainImageURL,
+                    ManufacturerName = product.Manufacturer.Name,
+                    CategoryName = product.Category.Name
+                };
+
+                models.Add(productViewModel);
+            }
+
+            return models;
+        }
+
+        public async Task<IEnumerable<ProductViewModel>> GetProductsFilteredLowToHighAsync(int page, int? count = null)
+        {
+            var products = new List<Product>();
+
+            products = await dbContext.Products
+               .Include(p => p.Category)
+               .Include(p => p.Manufacturer)
+               .OrderBy(p => p.Price)
+               .Skip(12 * ((int)(page == 0 ? 1 : page) - 1))
+               .Take(12)
+               .ToListAsync();
+
 
             if (products.Count == 0)
             {

@@ -24,6 +24,7 @@
     <link rel="stylesheet" href="/assets/css/lightcase.css">
     <link rel="stylesheet" href="/assets/css/theme.css" />
     <link rel="stylesheet" href="/assets/css/responsive.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
     <!-- End Include All CSS -->
     <!-- Favicon Icon -->
     <link rel="icon" type="image/png" href="/assets/images/favicon.png">
@@ -123,17 +124,18 @@
                                 <li><a class="list" href="#list" data-toggle="tab"><span></span><span></span><span></span></a></li>
                             </ul>
                             <p class="show-result">Показване на @Model.Count резултата</p>
+
                         </div>
                         <div class="col-md-5">
-                            <div class="sorting">
-                                <select name="orderby" class="orderby">
-                                    <option value="sorting" selected="selected">Default sorting</option>
-                                    <option value="new">Newest Products</option>
-                                    <option value="popular">Popular Products</option>
-                                    <option value="rating">Average Rating</option>
-                                    <option value="price">Price: Low to High</option>
-                                    <option value="price-desc">Price: High to Low</option>
-                                </select>
+                            <div>
+                                <div class="dropdown">
+                                    <button  class="dropbtn">Filter</button>
+                                    <div class="dropdown-content">
+                                        <a asp-controller="Shop" asp-action="Index2" asp-route-id="1">Default</a>
+                                        <a asp-controller="Shop" asp-action="FilterHighToLow" asp-route-id="1">High to Low</a>
+                                        <a asp-controller="Shop" asp-action="FilterLowToHigh" asp-route-id="1">Low to High</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -200,15 +202,21 @@
                                     <span style="text-align:center">Няма налични продукти от тази категория.</span>
                                 }
                             </div>
+
                             <div class="row">
                                 <div class="col-lg-12 fishto-pagination text-center">
-                                    <a class="next" href="shop-2.html"><i class="nss-chevron-left1"></i></a>
-                                    <span class="current">1</span>
-                                    <a href="shop-2.html">2</a>
-                                    <a href="shop-2.html">3</a>
-                                    <a href="shop-2.html">...</a>
-                                    <a href="shop-2.html">10</a>
-                                    <a class="next" href="shop-2.html"><i class="nss-chevron-right1"></i></a>
+                                    @for (int i = 1; i <= (int)TempData["pages"]; i++)
+                                    {
+                                        if ($"{i}" == TempData["curr"].ToString())
+                                        {
+                                            <a class="current" href="#" tabindex="-1">@i</a>
+                                        }
+                                        else
+                                        {
+                                            <a asp-controller="Shop" asp-action="Index2" asp-route-id="@i">@i</a>
+
+                                        }
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -280,13 +288,18 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-12 fishto-pagination text-center">
-                                        <a class="next" href="shop-2.html"><i class="nss-chevron-left1"></i></a>
-                                        <span class="current">1</span>
-                                        <a href="shop-2.html">2</a>
-                                        <a href="shop-2.html">3</a>
-                                        <a href="shop-2.html">...</a>
-                                        <a href="shop-2.html">10</a>
-                                        <a class="next" href="shop-2.html"><i class="nss-chevron-right1"></i></a>
+                                        @for (int i = 1; i <= (int)TempData["pages"]; i++)
+                                        {
+                                            if ($"{i}" == TempData["curr"].ToString())
+                                            {
+                                                <a class="current" href="#" tabindex="-1">@i</a>
+                                            }
+                                            else
+                                            {
+                                                <a asp-controller="Shop" asp-action="Index2" asp-route-id="@i">@i</a>
+
+                                            }
+                                        }
                                     </div>
                                 </div>
                             </div>
